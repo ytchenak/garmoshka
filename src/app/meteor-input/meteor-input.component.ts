@@ -9,12 +9,11 @@ export class MeteorInputComponent implements OnInit {
 
   columnDefs = [
     {headerName: '#', field: 'index', width: 50},
-    {headerName: 'Data', field: 'data', editable: true},
+    {headerName: 'Data', field: 'data'  , editable: true},
   ];
 
   private gridApi;
 
-  rowSelection = 'single';
   rowData = [];
 
 
@@ -29,10 +28,8 @@ export class MeteorInputComponent implements OnInit {
 
   onGridReady(params) {
     this.gridApi = params.api;
-    let idSequence = 0;
-    this.gridApi.forEachNode( function(rowNode, index) {
-      rowNode.id = idSequence++;
-    });
+    this.gridApi.setFocusedCell(0, "data");
+    
   }
 
   onClean() {
@@ -41,31 +38,23 @@ export class MeteorInputComponent implements OnInit {
   }
 
   onInsert() {
-    var selectedData = this.gridApi.getSelectedRows();
-    let index = selectedData[0].index;
-    this.rowData.splice(index, 0, [{index: index+1, data: ''}]);
-    index = 1;
-    this.rowData.forEach( x => x.index = index++);
+    let index = this.gridApi.getFocusedCell().rowIndex;
+    this.rowData.splice(index+1, 0, [{index: index, data: ''}]);
+    let i = 1;
+    this.rowData.forEach( x => x.index = i++);
     this.gridApi.setRowData(this.rowData);
+    this.gridApi.setFocusedCell(index, "data");
   }
 
   onDelete() {
-    var selectedData = this.gridApi.getSelectedRows();
-    let index = selectedData[0].index;
-    this.rowData.splice(index-1, 1);
-    index = 1;
-    this.rowData.forEach( x => x.index = index++);
+    let index = this.gridApi.getFocusedCell().rowIndex;
+    this.rowData.splice(index, 1);
+    let i = 1;
+    this.rowData.forEach( x => x.index = i++);
     this.gridApi.setRowData(this.rowData);
+    this.gridApi.setFocusedCell(index, "data");
   }
 
-  // onEdit() {
-  //   var selectedData = this.gridApi.getSelectedRows();
-  //   let index = selectedData[0].index;
-  //   this.gridApi.startEditingCell({
-  //     rowIndex: index-1,
-  //     colKey: "data"
-  //   });
-  // }
   onCalc() {
 
   }

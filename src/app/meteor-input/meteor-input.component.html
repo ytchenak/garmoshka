@@ -9,15 +9,14 @@
           <button class="btn btn-outline-primary mr-2 fa fa-save"  (click)="onInsert()"></button>
           </div>
         </div>
-    <div class="row flex-grow-1">
+    <div class="row flex-grow-1"> 
       <div class="col">
           <ag-grid-angular 
-          style="width: 100%; height: 100%;" 
+          style="width: 252px; height: 100%;" 
           class="ag-theme-balham"
           [rowData]="rowData" 
           [columnDefs]="columnDefs"
           [enterMovesDownAfterEdit]="true"
-          [rowSelection]="rowSelection"
           (gridReady)="onGridReady($event)"
           >
         </ag-grid-angular>
