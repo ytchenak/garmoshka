@@ -5,16 +5,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { MeteorInputComponent } from './meteor-input/meteor-input.component';
+import { SettingFormComponent } from './setting-form/setting-form.component';
+import { FormsModule }   from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MeteorInputComponent
+    MeteorInputComponent,
+    SettingFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AgGridModule.withComponents([])
+    AgGridModule.withComponents([]),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
