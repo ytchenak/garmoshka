@@ -266,11 +266,11 @@ export class MeteorService {
     let RaStartTime = this.RaStartTime;
     if( RaStartTime > startTime  )
       RaStartTime = this.decDays_(RaStartTime);
-    var deltaMins = (this.RaStartTime-RaStartTime)/(60*1000);
+    let deltaMins = (startTime.valueOf()-RaStartTime.valueOf())/(60*1000);
     return (deltaMins*this.RaDiffInMin + this.RaStartValue) % 360;
   }
   calcTeif_(startTime: Date, endTime: Date): number {
-    return (endTime.getMilliseconds()-startTime.getMilliseconds())/(60*60*1000);
+    return (endTime.valueOf()-startTime.valueOf())/(60*60*1000);
   }
   timeToStringTime_(time: Date): string {
     var hours = this.pad_(time.getUTCHours(), 2);
