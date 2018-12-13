@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MeteorService } from '../meteor.service';
 import { Router } from '@angular/router';
+import { SettingFormComponent } from '../setting-form/setting-form.component';
 
 @Component({
   selector: 'app-sheet',
@@ -49,4 +50,16 @@ export class SheetComponent implements OnInit {
     // this.gridApi.sizeColumnsToFit()
   }
 
+  onExport() {
+    var setting = new SettingFormComponent();
+    let name = setting.name;
+    if( this.router.url === '/count-distribution')
+      name += 'Count Distribution';
+    else if( this.router.url === '/magnitude-distribution')
+      name += ' Magnitude Distribution';
+    var params = {
+      fileName: name
+    };
+    this.gridApi.exportDataAsCsv(params);
+  }
 }

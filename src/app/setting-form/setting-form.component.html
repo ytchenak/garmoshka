@@ -1,28 +1,35 @@
 <form class="m-2">
   <div class="form-group row">
+      <label for="name" class="col-4 col-form-label">Name</label> 
+      <div class="col-8">
+        <input [(ngModel)]="name" id="name" name="name" type="text" class="form-control">
+      </div>
+  </div>
+    
+  <div class="form-group row">
     <label for="shower" class="col-4 col-form-label">Major meteor shower</label> 
     <div class="col-8">
-      <input [(ngModel)]="shower" id="shower" name="shower" type="text" class="form-control here">
+      <input [(ngModel)]="shower" id="shower" name="shower" type="text" class="form-control">
     </div>
   </div>
   <div class="form-group row">
     <label for="showers" class="col-4 col-form-label">Minors meteor shower list</label> 
     <div class="col-8">
-      <input [(ngModel)]="showers" id="showers" name="showers" type="text" aria-describedby="showersHelpBlock" class="form-control here"> 
+      <input [(ngModel)]="showers" id="showers" name="showers" type="text" aria-describedby="showersHelpBlock" class="form-control"> 
       <span id="showersHelpBlock" class="form-text text-muted">e.g. CAP,SDA,ANT (see List of Meteors)</span>
     </div>
   </div>
   <div class="form-group row">
     <label for="curDate" class="col-4 col-form-label">Local start date</label> 
     <div class="col-8">
-      <input [(ngModel)]="curDate" id="curDate" name="curDate" placeholder="DD/MM/YYYY" type="text" class="form-control here">
+      <input [(ngModel)]="curDate" id="curDate" name="curDate" placeholder="DD/MM/YYYY" type="text" class="form-control">
     </div>
   </div>
   <div class="form-group row">
     <label for="F" class="col-4 col-form-label">Field of obstruction</label> 
     <div class="col-8">
       <div class="input-group">
-        <input [(ngModel)]="F" id="F" name="F" type="text" class="form-control here"> 
+        <input [(ngModel)]="F" id="F" name="F" type="text" class="form-control"> 
         <div class="input-group-addon append">%</div>
       </div>
     </div>
@@ -30,14 +37,14 @@
   <div class="form-group row">
     <label for="Lm" class="col-4 col-form-label">Lm</label> 
     <div class="col-8">
-      <input [(ngModel)]="Lm" id="Lm" name="Lm" type="text" class="form-control here">
+      <input [(ngModel)]="Lm" id="Lm" name="Lm" type="text" class="form-control">
     </div>
   </div>
   <div class="form-group row">
     <label for="Dec" class="col-4 col-form-label">Dec</label> 
     <div class="col-8">
       <div class="input-group">
-        <input [(ngModel)]="Dec" id="Dec" name="Dec" type="text" class="form-control here"> 
+        <input [(ngModel)]="Dec" id="Dec" name="Dec" type="text" class="form-control"> 
         <div class="input-group-addon append">°</div>
       </div>
     </div>
@@ -45,13 +52,13 @@
   <div class="form-group row">
     <label for="RaStartTime" class="col-4 col-form-label">RA local start time</label> 
     <div class="col-8">
-      <input [(ngModel)]="RaStartTime" id="RaStartTime" name="RaStartTime" placeholder="HHMM" type="text" class="form-control here">
+      <input [(ngModel)]="RaStartTime" id="RaStartTime" name="RaStartTime" placeholder="HHMM" type="text" class="form-control">
     </div>
   </div>
   <div class="form-group row">
     <label for="RaStartValue" class="col-4 col-form-label">RA start value</label> 
     <div class="col-8">
-      <input [(ngModel)]="RaStartValue" id="RaStartValue" name="RaStartValue" type="text" class="form-control here">
+      <input [(ngModel)]="RaStartValue" id="RaStartValue" name="RaStartValue" type="text" class="form-control">
     </div>
   </div> 
 </form>

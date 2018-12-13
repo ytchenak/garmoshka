@@ -9,6 +9,7 @@ import {LocalStorage} from 'ngx-webstorage';
 })
 export class SettingFormComponent implements OnInit {
 
+  @LocalStorage() name: string;
   @LocalStorage() shower: string;
   @LocalStorage() showers: string;
   @LocalStorage() curDate: string;
