@@ -8,7 +8,7 @@ const routes: Routes = [
   {path: 'meteor-input', component: MeteorInputComponent},
   {path: 'setting', component: SettingFormComponent},
   {path: 'count-distribution', component: SheetComponent},
-  {path: 'magnitude-distribution', component: SheetComponent}
+  {path: 'magnitude-distribution', component: SheetComponent},
   {path: '', redirectTo: '/setting', pathMatch: 'full'},
   {path: '**', redirectTo: '', pathMatch: 'full'},
 ];
