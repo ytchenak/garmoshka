@@ -9,9 +9,9 @@ export class MeteorService {
   curDate: Date;
   shower: string;
   showers: string[];
-  Dec: any;
+  Dec: number;
   RaStartTime: any;
-  RaDiffInMin: number;
+  RaDiffInMin: number = 0.25;
   RaStartValue: number;
 
   LmrRegex = /^[Ll]m=([0-9]+\.?[0-9]*)$/;
