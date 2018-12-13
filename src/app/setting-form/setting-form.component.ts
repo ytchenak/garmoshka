@@ -23,6 +23,8 @@ export class SettingFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    if( !this.name)
+      this.name = '';
     if( !this.shower)
       this.shower = 'PER';
     if( !this.showers)

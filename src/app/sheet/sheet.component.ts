@@ -53,10 +53,12 @@ export class SheetComponent implements OnInit {
   onExport() {
     var setting = new SettingFormComponent();
     let name = setting.name;
+    if( name !== '' )
+      name += ' ';
     if( this.router.url === '/count-distribution')
-      name += ' Count Distribution';
+      name += 'Count Distribution';
     else if( this.router.url === '/magnitude-distribution')
-      name += ' Magnitude Distribution';
+      name += 'Magnitude Distribution';
     var params = {
       fileName: name,
       suppressQuotes: true
