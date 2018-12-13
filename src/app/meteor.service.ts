@@ -43,7 +43,7 @@ export class MeteorService {
         continue;
       }
       else if( dataValue === '//' ) {        //skip current periosd
-        if( !this.isTime_(dataValues[i-1][0]) )
+        if( !this.isTime_(dataValues[i-1]) )
           throw Error('Observation break without start time in input column row ' + (i+1));
         skip = true;
         
@@ -147,7 +147,7 @@ export class MeteorService {
 
   cleanSheet() {
     let sheet = [];
-    for (let i = 1; i < 10; i++) {
+    for (let i = 1; i < 1000; i++) {
       sheet[i] = [];  
     }
     return sheet;

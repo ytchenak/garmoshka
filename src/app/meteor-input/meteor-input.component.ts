@@ -76,5 +76,26 @@ export class MeteorInputComponent implements OnInit {
     this.rowData = this.rowData;
   }
 
+  onPaste() {
+
+    navigator.clipboard.readText()
+      .then(text => {
+        let data: [] = text.split('\n');
+        let i = 0;
+        for(; i<data.length; i++) {
+          this.rowData[i] = {data: data[i]};
+        }
+        for(; i<999; i++) {
+          this.rowData[i] = {data: ''}
+        }
+        this.gridApi.setRowData(this.rowData);
+        this.rowData = this.rowData;
+      })
+    .catch(err => {
+      console.error('Failed to read clipboard contents: ', err);
+    });
+
+
+  }
 
 }
