@@ -54,11 +54,12 @@ export class SheetComponent implements OnInit {
     var setting = new SettingFormComponent();
     let name = setting.name;
     if( this.router.url === '/count-distribution')
-      name += 'Count Distribution';
+      name += ' Count Distribution';
     else if( this.router.url === '/magnitude-distribution')
       name += ' Magnitude Distribution';
     var params = {
-      fileName: name
+      fileName: name,
+      suppressQuotes: true
     };
     this.gridApi.exportDataAsCsv(params);
   }
