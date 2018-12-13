@@ -23,7 +23,7 @@ export class MeteorInputComponent implements OnInit {
 
   @LocalStorage() rowData: Array<{data: string}>;
 
-  constructor(private meteorService: MeteorService) { 
+  constructor() { 
   }
 
   ngOnInit() {
@@ -65,10 +65,8 @@ export class MeteorInputComponent implements OnInit {
     this.gridApi.setFocusedCell(index, "data");
   }
 
-  onCalc() {
-    this.meteorService.calc(this.rowData.map( x => x.data));
-    console.log(this.meteorService.countDistribution);
-    console.log(this.meteorService.magnitudeDistribution);
+  get dataValues() {
+    return this.rowData.map( x => x.data);
   }
 
   onCellValueChanged($event) {
@@ -78,7 +76,7 @@ export class MeteorInputComponent implements OnInit {
 
   onPaste() {
 
-    navigator.clipboard.readText()
+    navigator['clipboard'].readText()
       .then(text => {
         let data: [] = text.split('\n');
         let i = 0;

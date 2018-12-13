@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SettingFormComponent } from './setting-form/setting-form.component';
+import { MeteorInputComponent } from './meteor-input/meteor-input.component';
 
 @Injectable({
   providedIn: 'root'
@@ -17,13 +18,15 @@ export class MeteorService {
 
   LmrRegex = /^[Ll]m=([0-9]+\.?[0-9]*)$/;
 
-  countDistribution = {}
-  magnitudeDistribution = {}
+  countDistribution: Array<Array<string|number>>;
+  magnitudeDistribution: Array<Array<any>>;
 
 
   constructor() { }
 
-  calc(dataValues: string[]) {
+  calc() {
+    let input = new MeteorInputComponent()
+    let dataValues = input.dataValues;
     this.readSetting_()
 
     let period = 1; 
@@ -168,6 +171,7 @@ export class MeteorService {
     var names = this.getShowersNames_(stat);
     for(var i=0; i<names.length; i++ ) {
       this.countDistribution[1][9+2*i] = names[i];
+      this.countDistribution[1][9+2*i+1] = '';
     }
   
     this.magnitudeDistribution = this.cleanSheet();

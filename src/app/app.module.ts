@@ -8,12 +8,14 @@ import { MeteorInputComponent } from './meteor-input/meteor-input.component';
 import { SettingFormComponent } from './setting-form/setting-form.component';
 import { FormsModule }   from '@angular/forms';
 import {NgxWebstorageModule} from 'ngx-webstorage';
+import { SheetComponent } from './sheet/sheet.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MeteorInputComponent,
-    SettingFormComponent
+    SettingFormComponent,
+    SheetComponent
   ],
   imports: [
     BrowserModule,

@@ -5,20 +5,18 @@
           <button class="btn btn-outline-primary mr-2 fa fa-plus"  (click)="onInsert()"></button>
           <button class="btn btn-outline-primary mr-2 fa fa-cut"   (click)="onDelete()"></button>
           <button class="btn btn-outline-primary mr-2 fa fa-paste"   (click)="onPaste()"></button>
-          <button class="btn btn-outline-primary mr-2 fa fa-calculator" (click)="onCalc()"></button>
           </div>
         </div>
     <div class="row flex-grow-1"> 
       <div class="col">
           <ag-grid-angular 
-          style="width: 252px; height: 100%;" 
-          class="ag-theme-balham"
-          [rowData]="rowData" 
-          [columnDefs]="columnDefs"
-          [enterMovesDownAfterEdit]="true"
-          (gridReady)="onGridReady($event)"
-          (cellValueChanged)="onCellValueChanged($event)"
-
+            style="width: 252px; height: 100%;" 
+            class="ag-theme-balham"
+            [rowData]="rowData" 
+            [columnDefs]="columnDefs"
+            [enterMovesDownAfterEdit]="true"
+            (gridReady)="onGridReady($event)"
+            (cellValueChanged)="onCellValueChanged($event)"
           >
         </ag-grid-angular>
       </div>
