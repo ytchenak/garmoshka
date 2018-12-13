@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { SettingFormComponent } from './setting-form/setting-form.component';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,8 @@ export class MeteorService {
   constructor() { }
 
   calc(dataValues: string[]) {
-  
+    this.readSetting_()
+
     let period = 1; 
    
     let stat = {};
@@ -96,6 +98,18 @@ export class MeteorService {
       //next
     }
   }
+  readSetting_() {
+    let setting = new SettingFormComponent();
+    this.shower = setting.shower;
+    this.showers = setting.showers.split(',');
+    let parts = setting.curDate.split('/');
+    this.curDate = new Date(parseInt(parts[2]), parseInt(parts[1])-1, parseInt(parts[0]));
+    this.F = parseFloat(setting.F);
+    this.Lm = parseFloat(setting.Lm);
+    this.Dec = parseFloat(setting.Dec);
+    this.RaStartTime = this.getTime_(setting.RaStartTime);
+    this.RaStartValue = parseFloat(setting.RaStartValue);
+  }
 
   isMinorShower_(dataValue: string): any {
     var regex = /^-?\d[A-Z]{3}$/;
@@ -130,8 +144,17 @@ export class MeteorService {
       stat['SPO'][i] = 0;
     }
   }
+
+  cleanSheet() {
+    let sheet = [];
+    for (let i = 1; i < 10; i++) {
+      sheet[i] = [];  
+    }
+    return sheet;
+  }
+
   cleanResults_(stat: {}): any {
-    this.countDistribution = {}
+    this.countDistribution = this.cleanSheet();
   
     this.countDistribution[1][1] = 'DATE UT';
     this.countDistribution[1][2] = 'START';
@@ -147,25 +170,25 @@ export class MeteorService {
       this.countDistribution[1][9+2*i] = names[i];
     }
   
-    this.magnitudeDistribution = {}
-    this.countDistribution[1][ 1] = 'DATE UT';
-    this.countDistribution[1][ 2] = 'START';
-    this.countDistribution[1][ 3] = 'END';
-    this.countDistribution[1][ 4] = 'SHOWER';
-    this.countDistribution[1][ 5] = '-6';
-    this.countDistribution[1][ 6] = '-5';
-    this.countDistribution[1][ 7] = '-4';
-    this.countDistribution[1][ 8] = '-3';
-    this.countDistribution[1][ 9] = '-2';
-    this.countDistribution[1][10] = '-1';
-    this.countDistribution[1][11] = '0';
-    this.countDistribution[1][12] = '1';
-    this.countDistribution[1][13] = '2';
-    this.countDistribution[1][14] = '3';
-    this.countDistribution[1][15] = '4';
-    this.countDistribution[1][16] = '5';
-    this.countDistribution[1][17] = '6';
-    this.countDistribution[1][18] = '7';
+    this.magnitudeDistribution = this.cleanSheet();
+    this.magnitudeDistribution[1][ 1] = 'DATE UT';
+    this.magnitudeDistribution[1][ 2] = 'START';
+    this.magnitudeDistribution[1][ 3] = 'END';
+    this.magnitudeDistribution[1][ 4] = 'SHOWER';
+    this.magnitudeDistribution[1][ 5] = '-6';
+    this.magnitudeDistribution[1][ 6] = '-5';
+    this.magnitudeDistribution[1][ 7] = '-4';
+    this.magnitudeDistribution[1][ 8] = '-3';
+    this.magnitudeDistribution[1][ 9] = '-2';
+    this.magnitudeDistribution[1][10] = '-1';
+    this.magnitudeDistribution[1][11] = '0';
+    this.magnitudeDistribution[1][12] = '1';
+    this.magnitudeDistribution[1][13] = '2';
+    this.magnitudeDistribution[1][14] = '3';
+    this.magnitudeDistribution[1][15] = '4';
+    this.magnitudeDistribution[1][16] = '5';
+    this.magnitudeDistribution[1][17] = '6';
+    this.magnitudeDistribution[1][18] = '7';
   }
   isTime_(dataValue: string): any {
     return typeof(dataValue) === 'string' && /^\d{4}$/.test(dataValue);

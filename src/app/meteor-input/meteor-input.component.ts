@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MeteorService } from '../meteor.service';
+import { LocalStorage } from 'ngx-webstorage';
+import { getInjectorIndex } from '@angular/core/src/render3/di';
 
 @Component({
   selector: 'app-meteor-input',
@@ -8,23 +11,34 @@ import { Component, OnInit } from '@angular/core';
 export class MeteorInputComponent implements OnInit {
 
   columnDefs = [
-    {headerName: '#', field: 'index', width: 50},
+    {headerName: '#', valueGetter: this.getIndex, editable: false, width: 50},
     {headerName: 'Data', field: 'data'  , editable: true},
   ];
 
+  getIndex(params) {
+    return params.node.childIndex + 1;
+  }
+
   private gridApi;
 
-  rowData = [];
+  @LocalStorage() rowData: Array<{data: string}>;
 
-
-  constructor() { 
-    for (let i = 0; i < 999; i++) {
-      this.rowData.push({index: i+1, data: ''});   
-    }
+  constructor(private meteorService: MeteorService) { 
   }
 
   ngOnInit() {
+    if( !this.rowData)
+      this.rowData = this.cleanRowData();
   }
+
+  cleanRowData(): Array<{data: string}> {
+    let rowData = new Array<{data: string}>();
+    for (let i = 0; i < 999; i++) {
+      rowData.push({data: ''});   
+    }
+    return rowData;
+  }
+
 
   onGridReady(params) {
     this.gridApi = params.api;
@@ -33,15 +47,13 @@ export class MeteorInputComponent implements OnInit {
   }
 
   onClean() {
-    this.rowData.forEach( x => x.data = '');
+    this.rowData = this.cleanRowData();
     this.gridApi.setRowData(this.rowData);
   }
 
   onInsert() {
     let index = this.gridApi.getFocusedCell().rowIndex;
-    this.rowData.splice(index+1, 0, [{index: index, data: ''}]);
-    let i = 1;
-    this.rowData.forEach( x => x.index = i++);
+    this.rowData.splice(index+1, 0, {data: ''});
     this.gridApi.setRowData(this.rowData);
     this.gridApi.setFocusedCell(index, "data");
   }
@@ -49,13 +61,20 @@ export class MeteorInputComponent implements OnInit {
   onDelete() {
     let index = this.gridApi.getFocusedCell().rowIndex;
     this.rowData.splice(index, 1);
-    let i = 1;
-    this.rowData.forEach( x => x.index = i++);
     this.gridApi.setRowData(this.rowData);
     this.gridApi.setFocusedCell(index, "data");
   }
 
   onCalc() {
-
+    this.meteorService.calc(this.rowData.map( x => x.data));
+    console.log(this.meteorService.countDistribution);
+    console.log(this.meteorService.magnitudeDistribution);
   }
+
+  onCellValueChanged($event) {
+    //trigger save the dat in web storage    
+    this.rowData = this.rowData;
+  }
+
+
 }

@@ -18,7 +18,7 @@ export class SettingFormComponent implements OnInit {
   @LocalStorage() RaStartTime: string;
   @LocalStorage() RaStartValue: string;
 
-  constructor(private meteorService: MeteorService) {
+  constructor() {
   }
 
   ngOnInit() {
@@ -40,23 +40,6 @@ export class SettingFormComponent implements OnInit {
       this.RaStartValue = '236';
   }
 
-  onSave() {
-    this.meteorService.shower = this.shower;
-    this.meteorService.showers = this.showers.split(',');
-    let parts = this.curDate.split('/');
-    this.meteorService.curDate = new Date(parseInt(parts[2]), parseInt(parts[1])-1, parseInt(parts[0]));
-    this.meteorService.F = parseFloat(this.F);
-    this.meteorService.Lm = parseFloat(this.Lm);
-    this.meteorService.Dec = parseFloat(this.Dec);
-    this.meteorService.RaStartTime = this.getTime_(this.RaStartTime);
-    this.meteorService.RaStartValue = parseFloat(this.RaStartValue);
-  }
-  getTime_(timeValue: string): Date {
-    var hours = timeValue.slice(0,2);
-    var minutes = timeValue.slice(2,4);
-    var time = new Date( this.meteorService.curDate.getFullYear(), this.meteorService.curDate.getMonth(), this.meteorService.curDate.getDate(), parseInt(hours), parseInt(minutes));
-    return time;
-  }
     
 
   
