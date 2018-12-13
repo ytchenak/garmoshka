@@ -23,7 +23,7 @@ export class MeteorInputComponent implements OnInit {
 
   @LocalStorage() rowData: Array<{data: string}>;
 
-  constructor() { 
+  constructor(private meteorService: MeteorService) { 
   }
 
   ngOnInit() {
@@ -72,6 +72,11 @@ export class MeteorInputComponent implements OnInit {
   onCellValueChanged($event) {
     //trigger save the dat in web storage    
     this.rowData = this.rowData;
+    try {
+      this.meteorService.calc(this.dataValues);
+    } catch(e) {
+      alert(e);
+    }
   }
 
   onPaste() {

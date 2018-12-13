@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { SettingFormComponent } from './setting-form/setting-form.component';
-import { MeteorInputComponent } from './meteor-input/meteor-input.component';
 
 @Injectable({
   providedIn: 'root'
@@ -24,9 +23,7 @@ export class MeteorService {
 
   constructor() { }
 
-  calc() {
-    let input = new MeteorInputComponent()
-    let dataValues = input.dataValues;
+  calc(dataValues: Array<string>) {
     this.readSetting_()
 
     let period = 1; 

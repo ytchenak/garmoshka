@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MeteorService } from '../meteor.service';
 import { Router } from '@angular/router';
 import { SettingFormComponent } from '../setting-form/setting-form.component';
+import { MeteorInputComponent } from '../meteor-input/meteor-input.component';
 
 @Component({
   selector: 'app-sheet',
@@ -29,7 +30,9 @@ export class SheetComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.meteorService.calc();
+    let input = new MeteorInputComponent(this.meteorService);
+    this.meteorService.calc(input.dataValues);
+
     let data = this.getData();
     for (let i = 1; i < data[1].length; i++) {
       this.columnDefs.push( {
