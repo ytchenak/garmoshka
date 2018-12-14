@@ -12,7 +12,7 @@ export class MeteorInputComponent implements OnInit {
 
   columnDefs = [
     {headerName: '#', valueGetter: this.getIndex, editable: false, width: 50},
-    {headerName: 'Data', field: 'data'  , editable: true},
+    {headerName: 'Data', field: 'data', editable: true, cellStyle: {'font-size': '20px'}},
   ];
 
   getIndex(params) {
