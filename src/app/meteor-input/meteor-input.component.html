@@ -1,28 +1,29 @@
-<div class="container-fluid h-100 d-flex flex-column" >
+<div class="row h-100">
+  <div  class="col">
     <div class="row">
-      <div class="col btn-group">
-          <button class="btn btn-outline-primary mx-2 fa fa-trash" (click)="onClean()"    title="delete all"></button>
-          <button class="btn btn-outline-primary mr-2 fa fa-plus"  (click)="onInsert()"   title="insert row"></button>
-          <button class="btn btn-outline-primary mr-2 fa fa-cut"   (click)="onDelete()"   title="delete row"></button>
-          <button class="btn btn-outline-primary mr-2 fa fa-copy"  (click)="onCopyAll()"  title="copy all"></button>
-          <button class="btn btn-outline-primary mr-2 fa fa-paste" (click)="onPasteAll()" title="paste all"></button>
-          </div>
-        </div>
-    <div class="row flex-grow-1"> 
-      <div class="col">
-          <ag-grid-angular 
-            style="width: 252px; height: 100%;" 
-            class="ag-theme-balham"
-            [rowData]="rowData" 
-            [columnDefs]="columnDefs"
-            [enterMovesDownAfterEdit]="true"
-            (gridReady)="onGridReady($event)"
-            (cellValueChanged)="onCellValueChanged($event)"
-          >
-        </ag-grid-angular>
+      <div class="btn-group">
+        <button class="btn btn-outline-primary fa fa-trash" (click)="onClean()"    title="delete all"></button>
+        <button class="btn btn-outline-primary fa fa-plus"  (click)="onInsert()"   title="insert row"></button>
+        <button class="btn btn-outline-primary fa fa-cut"   (click)="onDelete()"   title="delete row"></button>
+        <button class="btn btn-outline-primary fa fa-copy"  (click)="onCopyAll()"  title="copy all"></button>
+        <button class="btn btn-outline-primary fa fa-paste" (click)="onPasteAll()" title="paste all"></button>
       </div>
-    
-  </div>    
+    </div>
+    <div class="row h-100"> 
+      <ag-grid-angular 
+        style="width: 100%; height: 530px;" 
+        class="ag-theme-balham"
+        [rowData]="rowData" 
+        [columnDefs]="columnDefs"
+        [enterMovesDownAfterEdit]="true"
+        (gridReady)="onGridReady($event)"
+        (cellValueChanged)="onCellValueChanged($event)">
+      </ag-grid-angular>
+    </div>
+  </div>
+
+  <!-- <div class="col">
+    some text
+  </div> -->
 </div>
-<div class="row">
-</div>
+

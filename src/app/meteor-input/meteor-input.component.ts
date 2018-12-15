@@ -40,7 +40,7 @@ export class MeteorInputComponent implements OnInit {
   }
 
 
-  private onGridReady(params) {
+  onGridReady(params) {
     this.gridApi = params.api;
     this.gridApi.setFocusedCell(0, "data");
     
