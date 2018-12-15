@@ -83,11 +83,9 @@ export class MeteorInputComponent implements OnInit {
     }
   }
 
-  onPaste() {
-    if (!confirm('All data will be deleted, are you sure?')) 
-      return;
-
-    navigator['clipboard'].readText()
+  private pasteFromClipboard(): void {
+    
+    return navigator['clipboard'].readText()
       .then(text => {
         let data: [] = text.split('\n');
         let i = 0;
@@ -103,8 +101,18 @@ export class MeteorInputComponent implements OnInit {
     .catch(err => {
       console.error('Failed to read clipboard contents: ', err);
     });
-
-
+  }
+  onPasteAll() {
+    if (!confirm('All data will be deleted, are you sure?')) 
+      return;
+    setTimeout(() => this.pasteFromClipboard(),1000);
+  }
+  onCopyAll() {
+    let text = this.dataValues.join('\n');
+    navigator['clipboard'].writeText(text)
+      .catch(err => {
+        console.error('Failed to write content to clipboard: ', err);
+      });
   }
 
 }
