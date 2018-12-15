@@ -31,7 +31,7 @@ export class MeteorInputComponent implements OnInit {
       this.rowData = this.cleanRowData();
   }
 
-  cleanRowData(): Array<{data: string}> {
+  private cleanRowData(): Array<{data: string}> {
     let rowData = new Array<{data: string}>();
     for (let i = 0; i < 999; i++) {
       rowData.push({data: ''});   
@@ -40,15 +40,17 @@ export class MeteorInputComponent implements OnInit {
   }
 
 
-  onGridReady(params) {
+  private onGridReady(params) {
     this.gridApi = params.api;
     this.gridApi.setFocusedCell(0, "data");
     
   }
 
   onClean() {
-    this.rowData = this.cleanRowData();
-    this.gridApi.setRowData(this.rowData);
+    if (confirm('All data will be deleted, are you sure?')) {
+      this.rowData = this.cleanRowData();
+      this.gridApi.setRowData(this.rowData);
+    }
   }
 
   onInsert() {
@@ -56,6 +58,7 @@ export class MeteorInputComponent implements OnInit {
     this.rowData.splice(index+1, 0, {data: ''});
     this.gridApi.setRowData(this.rowData);
     this.gridApi.setFocusedCell(index, "data");
+    this.gridApi.ensureIndexVisible(index, 'middle')
   }
 
   onDelete() {
@@ -63,6 +66,7 @@ export class MeteorInputComponent implements OnInit {
     this.rowData.splice(index, 1);
     this.gridApi.setRowData(this.rowData);
     this.gridApi.setFocusedCell(index, "data");
+    this.gridApi.ensureIndexVisible(index, 'middle')
   }
 
   get dataValues() {
@@ -80,6 +84,8 @@ export class MeteorInputComponent implements OnInit {
   }
 
   onPaste() {
+    if (!confirm('All data will be deleted, are you sure?')) 
+      return;
 
     navigator['clipboard'].readText()
       .then(text => {
