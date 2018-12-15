@@ -3,6 +3,7 @@ import { MeteorService } from '../meteor.service';
 import { Router } from '@angular/router';
 import { SettingFormComponent } from '../setting-form/setting-form.component';
 import { MeteorInputComponent } from '../meteor-input/meteor-input.component';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-sheet',
@@ -66,6 +67,8 @@ export class SheetComponent implements OnInit {
       fileName: name,
       suppressQuotes: true
     };
-    this.gridApi.exportDataAsCsv(params);
+    var csv = this.gridApi.getDataAsCsv(params);
+    var blob = new Blob([csv], {type: "text/csv;charset=utf-8"});
+    saveAs(blob, name);
   }
 }
