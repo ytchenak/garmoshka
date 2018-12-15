@@ -63,12 +63,13 @@ export class SheetComponent implements OnInit {
       name += 'Count Distribution';
     else if( this.router.url === '/magnitude-distribution')
       name += 'Magnitude Distribution';
+    name += '.csv';
     var params = {
       fileName: name,
       suppressQuotes: true
     };
     var csv = this.gridApi.getDataAsCsv(params);
-    var blob = new Blob([csv], {type: "text/csv;charset=utf-8"});
+    var blob = new Blob([csv], {type: "text/plain;charset=utf-8"});
     saveAs(blob, name);
   }
 }
