@@ -1,17 +1,50 @@
-      <div class="btn-group">
-        <button class="btn btn-outline-primary fa fa-trash" (click)="onClean()"    title="delete all"></button>
-        <button class="btn btn-outline-primary fa fa-plus"  (click)="onInsert()"   title="insert row"></button>
-        <button class="btn btn-outline-primary fa fa-cut"   (click)="onDelete()"   title="delete row"></button>
-        <button class="btn btn-outline-primary fa fa-copy"  (click)="onCopyAll()"  title="copy all"></button>
-        <button class="btn btn-outline-primary fa fa-paste" (click)="onPasteAll()" title="paste all"></button>
-      </div>
-      <ag-grid-angular 
-        style="width: 100%; height: 530px;" 
-        class="ag-theme-balham"
-        [rowData]="rowData" 
-        [columnDefs]="columnDefs"
-        [enterMovesDownAfterEdit]="true"
-        (gridReady)="onGridReady($event)"
-        (cellValueChanged)="onCellValueChanged($event)">
-      </ag-grid-angular>
+<div class="row">
+  <div class="col-2">
 
+  <div class="btn-group mx-2">
+    <button class="btn btn-outline-primary fa fa-trash" (click)="onClean()"    title="delete all"></button>
+    <button class="btn btn-outline-primary fa fa-plus"  (click)="onInsert()"   title="insert row"></button>
+    <button class="btn btn-outline-primary fa fa-cut"   (click)="onDelete()"   title="delete row"></button>
+    <button class="btn btn-outline-primary fa fa-copy"  (click)="onCopyAll()"  title="copy all"></button>
+    <button class="btn btn-outline-primary fa fa-paste" (click)="onPasteAll()" title="paste all"></button>
+  </div>
+  <ag-grid-angular 
+    style="height: 530px;" 
+    class="ag-theme-balham"
+    [rowData]="rowData" 
+    [columnDefs]="columnDefs"
+    [enterMovesDownAfterEdit]="true"
+    (gridReady)="onGridReady($event)"
+    (cellValueChanged)="onCellValueChanged($event)">
+  </ag-grid-angular>
+</div>
+<div class="col-10 h-100">
+    <div class="card m-5">
+
+      <ul>
+        <li>Enter needed fields in Setting tab</li>
+        <li>Enter observation data in Input tab; <br>            
+            each row can contain a value in the following format: 
+        </li>
+        <ul>
+          <li>Time in format HHMM</li>
+          <li>Meteor magnitude from -6 until 7</li>
+          <ul>
+            <li>For sporadic add minus at end (e.g 3-)</li>
+            <li>For minor shower add at end a meteor code of the shower (e.g.: 3CAP)</li>
+            see <a href="https://www.imo.net/members/imo_showers/working_shower_list">shower list</a>
+          </ul>
+          <li>For observation break enter two slashes (//)</li>
+          <li>For field of obstruction enter a percent (e.g. 20%)</li>
+          <li>Limited magnitude (e.g Lm=6.1)</li>
+        </ul>
+        <li>Download the calculated tabs in csv format as following:<br>
+          select Count Distribution tab, Export as CSV;
+          do the same for Magnitude Distribution tab</li>
+        <li>Navigate to <a href="https://www.imo.net/members/imo_observation/upload_observation">upload observation</a> 
+          and follow instraction to upload the two downloaded csv files</li>  
+      </ul>
+    </div>
+</div>
+
+</div>

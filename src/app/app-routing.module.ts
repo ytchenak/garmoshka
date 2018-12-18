@@ -9,7 +9,7 @@ const routes: Routes = [
   {path: 'setting', component: SettingFormComponent},
   {path: 'count-distribution', component: SheetComponent},
   {path: 'magnitude-distribution', component: SheetComponent},
-  {path: '', redirectTo: '/setting', pathMatch: 'full'},
+  {path: '', redirectTo: '/meteor-input', pathMatch: 'full'},
   {path: '**', redirectTo: '', pathMatch: 'full'},
 ];
 
