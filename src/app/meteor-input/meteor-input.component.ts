@@ -105,7 +105,7 @@ export class MeteorInputComponent implements OnInit {
   onPasteAll() {
     if (!confirm('All data will be deleted, are you sure?')) 
       return;
-    setTimeout(() => this.pasteFromClipboard(),100);
+    setTimeout(() => this.pasteFromClipboard(),250);
   }
   onCopyAll() {
     let text = this.dataValues.join('\n');
