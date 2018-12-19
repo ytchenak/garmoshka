@@ -17,34 +17,41 @@
     (gridReady)="onGridReady($event)"
     (cellValueChanged)="onCellValueChanged($event)">
   </ag-grid-angular>
-</div>
-<div class="col-10 h-100">
-    <div class="card m-5">
+  </div>
+  <div class="col-7 h-100">
 
-      <ul>
-        <li>Enter needed fields in Setting tab</li>
-        <li>Enter observation data in Input tab; <br>            
-            each row can contain a value in the following format: 
-        </li>
-        <ul>
-          <li>Time in format HHMM</li>
-          <li>Meteor magnitude from -6 until 7</li>
-          <ul>
-            <li>For sporadic add minus at end (e.g 3-)</li>
-            <li>For minor shower add at end a meteor code of the shower (e.g.: 3CAP)</li>
-            see <a href="https://www.imo.net/members/imo_showers/working_shower_list">shower list</a>
-          </ul>
-          <li>For observation break enter two slashes (//)</li>
-          <li>For field of obstruction enter a percent (e.g. 20%)</li>
-          <li>Limited magnitude (e.g Lm=6.1)</li>
-        </ul>
-        <li>Download the calculated tabs in csv format as following:<br>
-          select Count Distribution tab, Export as CSV;
-          do the same for Magnitude Distribution tab</li>
-        <li>Navigate to <a href="https://www.imo.net/members/imo_observation/upload_observation">upload observation</a> 
-          and follow instraction to upload the two downloaded csv files</li>  
-      </ul>
-    </div>
-</div>
-
+      <div class="card m-5">
+        <div class="card-body">
+          <div class="card-text">
+            <ul> 
+              <li>Enter needed fields in Setting tab</li>
+              <li>Enter observation data in Input tab; <br>            
+                  each row can contain a value in the following format: 
+              </li>
+              <ul>
+                <li>Time in format HHMM</li>
+                <li>Meteor magnitude from -6 until 7</li>
+                <ul>
+                  <li>For sporadic add minus at end (e.g 3-)</li>
+                  <li>For minor shower add at end a meteor code of the shower (e.g.: 3CAP)</li>
+                  see <a href="https://www.imo.net/members/imo_showers/working_shower_list">shower list</a>
+                </ul>
+                <li>For observation break enter two slashes (//)</li>
+                <li>For field of obstruction enter a percent (e.g. 20%)</li>
+                <li>Limited magnitude (e.g Lm=6.1)</li>
+              </ul>
+              <li>Download the calculated tabs in csv format as following:<br>
+                select Count Distribution tab, Export as CSV;<br>
+                do the same for Magnitude Distribution tab</li>
+              <li>Navigate to <a href="https://www.imo.net/members/imo_observation/upload_observation">upload observation</a> 
+                and follow instraction to upload the two downloaded csv files</li>  
+            </ul>
+          </div>
+        </div>
+      </div>
+  </div>
+  <div class="col-3">
+    <div>{{meteorService.shower}}: {{meteorService.showerCount}}</div>
+    <div>SPO: {{meteorService.spoCount}}</div>
+  </div>
 </div>

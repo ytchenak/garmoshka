@@ -17,8 +17,10 @@ export class MeteorService {
 
   LmrRegex = /^[Ll]m=([0-9]+\.?[0-9]*)$/;
 
-  countDistribution: Array<Array<string|number>>;
+  countDistribution: Array<Array<any>>;
   magnitudeDistribution: Array<Array<any>>;
+  spoCount: number;
+  showerCount: number;
 
 
   constructor() { }
@@ -36,6 +38,8 @@ export class MeteorService {
     let skip = false;
     
     this.cleanResults_(stat);
+    this.spoCount = 0;
+    this.showerCount = 0;   
     for( let i=0; i<dataValues.length; i++ ) {
       let dataValue = dataValues[i];
   
@@ -81,11 +85,12 @@ export class MeteorService {
       } else { //magnitude     
         if( this.isSporadic_(dataValue)) {
           var mag = dataValue.slice(0, -1);
-          this.addMeteorToStat_(stat, 'SPO', mag); 
+          this.addMeteorToStat_(stat, 'SPO', mag);
+          this.spoCount += 1 
         } else if( this.isDefaultShower_(dataValue)) {  //default shower
           var mag = dataValue;
           this.addMeteorToStat_(stat, this.shower, mag); 
-        
+          this.showerCount += 1;
         } else if(this.isMinorShower_(dataValue)) {     //minior shower
           var name = dataValue.slice(-3);
           var mag = dataValue.slice(0,-3);

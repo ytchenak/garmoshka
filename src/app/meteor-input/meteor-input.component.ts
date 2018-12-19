@@ -29,6 +29,7 @@ export class MeteorInputComponent implements OnInit {
   ngOnInit() {
     if( !this.rowData)
       this.rowData = this.cleanRowData();
+    this.calc();
   }
 
   private cleanRowData(): Array<{data: string}> {
@@ -76,12 +77,17 @@ export class MeteorInputComponent implements OnInit {
   onCellValueChanged($event) {
     //trigger save the dat in web storage    
     this.rowData = this.rowData;
+    this.calc();
+  }
+
+  calc() {
     try {
       this.meteorService.calc(this.dataValues);
     } catch(e) {
       alert(e);
     }
   }
+
 
   private pasteFromClipboard(): void {
     
