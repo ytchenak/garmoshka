@@ -87,10 +87,10 @@ export class MeteorInputComponent implements OnInit {
     
     return navigator['clipboard'].readText()
       .then(text => {
-        let data: [] = text.split('\n');
+        let data: string[] = text.split('\n');
         let i = 0;
         for(; i<data.length; i++) {
-          this.rowData[i] = {data: data[i]};
+          this.rowData[i] = {data: data[i].trim()};
         }
         for(; i<999; i++) {
           this.rowData[i] = {data: ''}
@@ -105,7 +105,7 @@ export class MeteorInputComponent implements OnInit {
   onPasteAll() {
     if (!confirm('All data will be deleted, are you sure?')) 
       return;
-    setTimeout(() => this.pasteFromClipboard(),1000);
+    setTimeout(() => this.pasteFromClipboard(),100);
   }
   onCopyAll() {
     let text = this.dataValues.join('\n');
