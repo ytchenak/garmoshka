@@ -23,7 +23,7 @@ export class MeteorInputComponent implements OnInit {
 
   @LocalStorage() rowData: Array<{data: string}>;
 
-  constructor(private meteorService: MeteorService) { 
+  constructor(public meteorService: MeteorService) { 
   }
 
   ngOnInit() {
