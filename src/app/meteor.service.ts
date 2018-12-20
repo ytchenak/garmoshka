@@ -21,7 +21,7 @@ export class MeteorService {
   magnitudeDistribution: Array<Array<any>>;
   spoCount: number;
   showerCount: number;
-
+  stat = {};
 
   constructor() { }
 
@@ -32,6 +32,7 @@ export class MeteorService {
    
     let stat = {};
     this.initStat_(stat);
+    this.initStat_(this.stat);
     let startTime = null;
     let endTime = null;
     
@@ -222,7 +223,9 @@ export class MeteorService {
     let nmag = parseInt(mag);
     if( nmag < -6 || nmag > 7 )
       throw Error('Meteor magnitude ' + mag + ' no in range from -6 to 7. Please report meteors with magnitude less -6 in fairball forum');
-    stat[name][mag]++;        
+    stat[name][mag]++;  
+    this.stat[name][mag]++;  
+          
   }
   
   addCountDistribution_(period: number, startTime: Date, endTime: Date, stat: {}): void {
