@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MeteorService } from '../meteor.service';
 import { LocalStorage } from 'ngx-webstorage';
 import { getInjectorIndex } from '@angular/core/src/render3/di';
+import { SettingFormComponent } from '../setting-form/setting-form.component';
 
 @Component({
   selector: 'app-meteor-input',
@@ -12,7 +13,7 @@ export class MeteorInputComponent implements OnInit {
 
   columnDefs = [
     {headerName: '#', valueGetter: this.getIndex, editable: false, width: 50},
-    {headerName: '', field: 'data', editable: true, width: 150, cellStyle: {'font-size': '20px'}},
+    {headerName: '', field: 'data', editable: true, width: 100, cellStyle: {'font-size': '20px'}},
   ];
 
   getIndex(params) {
@@ -27,8 +28,11 @@ export class MeteorInputComponent implements OnInit {
   }
 
   ngOnInit() {
-    if( !this.rowData)
+    if( !this.rowData) {
       this.rowData = this.cleanRowData();
+      new SettingFormComponent(); //ensure that setting will be written in localstorage
+    }
+
     this.calc();
   }
 
@@ -51,6 +55,7 @@ export class MeteorInputComponent implements OnInit {
     if (confirm('All data will be deleted, are you sure?')) {
       this.rowData = this.cleanRowData();
       this.gridApi.setRowData(this.rowData);
+      this.calc();
     }
   }
 
@@ -103,6 +108,7 @@ export class MeteorInputComponent implements OnInit {
         }
         this.gridApi.setRowData(this.rowData);
         this.rowData = this.rowData;
+        this.calc();
       })
     .catch(err => {
       console.error('Failed to read clipboard contents: ', err);

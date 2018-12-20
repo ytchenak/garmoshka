@@ -36,8 +36,12 @@ export class SheetComponent implements OnInit {
 
     let data = this.getData();
     for (let i = 1; i < data[1].length; i++) {
+      let minWidth = 0;
+      if( i<4)
+        minWidth = 100;
       this.columnDefs.push( {
         headerName: data[1][i],
+        minWidth: minWidth,
         field: i.toLocaleString() 
       });
     }
@@ -51,7 +55,7 @@ export class SheetComponent implements OnInit {
 
   onGridReady($event) {
     this.gridApi = $event.api;
-    // this.gridApi.sizeColumnsToFit()
+    this.gridApi.sizeColumnsToFit()
   }
 
   onExport() {

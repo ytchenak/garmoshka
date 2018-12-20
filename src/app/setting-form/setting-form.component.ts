@@ -20,9 +20,6 @@ export class SettingFormComponent implements OnInit {
   @LocalStorage() RaStartValue: string;
 
   constructor() {
-  }
-
-  ngOnInit() {
     if( !this.name)
       this.name = '';
     if( !this.shower)
@@ -41,6 +38,9 @@ export class SettingFormComponent implements OnInit {
       this.RaStartTime = '1900';
     if( !this.RaStartValue)
       this.RaStartValue = '236';
+  }
+
+  ngOnInit() {
   }
 
     
