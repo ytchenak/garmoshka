@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-2">
+  <div class="col-m-2">
 
   <div class="btn-group mx-2">
     <button class="btn btn-outline-primary fa fa-trash" (click)="onClean()"    title="delete all"></button>
@@ -9,7 +9,7 @@
     <button class="btn btn-outline-primary fa fa-paste" (click)="onPasteAll()" title="paste all"></button>
   </div>
   <ag-grid-angular 
-    style="height: 530px;" 
+    style="height: 100%;" 
     class="ag-theme-balham"
     [rowData]="rowData" 
     [columnDefs]="columnDefs"
@@ -18,7 +18,26 @@
     (cellValueChanged)="onCellValueChanged($event)">
   </ag-grid-angular>
   </div>
-  <div class="col-7 h-100">
+  <div class="col-m-2 mx-4">
+    <div>{{meteorService.shower}}: {{meteorService.showerCount}}</div>
+    <div>SPO: {{meteorService.spoCount}}</div>
+    <p></p>
+    <div>-6:&nbsp; {{meteorService.stat[meteorService.shower][-6]}}</div>
+    <div>-5:&nbsp; {{meteorService.stat[meteorService.shower][-5]}}</div>
+    <div>-4:&nbsp; {{meteorService.stat[meteorService.shower][-4]}}</div>
+    <div>-3:&nbsp; {{meteorService.stat[meteorService.shower][-3]}}</div>
+    <div>-2:&nbsp; {{meteorService.stat[meteorService.shower][-2]}}</div>
+    <div>-1:&nbsp; {{meteorService.stat[meteorService.shower][-1]}}</div>
+    <div>&nbsp; 0:&nbsp; {{meteorService.stat[meteorService.shower]['0']}}</div>
+    <div>&nbsp; 1:&nbsp; {{meteorService.stat[meteorService.shower][1]}}</div>
+    <div>&nbsp; 2:&nbsp; {{meteorService.stat[meteorService.shower][2]}}</div>
+    <div>&nbsp; 3:&nbsp; {{meteorService.stat[meteorService.shower][3]}}</div>
+    <div>&nbsp; 4:&nbsp; {{meteorService.stat[meteorService.shower][4]}}</div>
+    <div>&nbsp; 5:&nbsp; {{meteorService.stat[meteorService.shower][5]}}</div>
+    <div>&nbsp; 6:&nbsp; {{meteorService.stat[meteorService.shower][6]}}</div>
+    <div>&nbsp; 7:&nbsp; {{meteorService.stat[meteorService.shower][7]}}</div>
+  </div>
+  <div class="col-m-8 h-100">
 
       <div class="card m-5">
         <div class="card-body">
@@ -50,23 +69,4 @@
         </div>
       </div>
   </div>
-  <div class="col-3">
-    <div>{{meteorService.shower}}: {{meteorService.showerCount}}</div>
-    <div>SPO: {{meteorService.spoCount}}</div>
-    <p></p>
-    <div>-6:&nbsp; {{meteorService.stat[meteorService.shower][-6]}}</div>
-    <div>-5:&nbsp; {{meteorService.stat[meteorService.shower][-5]}}</div>
-    <div>-4:&nbsp; {{meteorService.stat[meteorService.shower][-4]}}</div>
-    <div>-3:&nbsp; {{meteorService.stat[meteorService.shower][-3]}}</div>
-    <div>-2:&nbsp; {{meteorService.stat[meteorService.shower][-2]}}</div>
-    <div>-1:&nbsp; {{meteorService.stat[meteorService.shower][-1]}}</div>
-    <div>&nbsp; 0:&nbsp; {{meteorService.stat[meteorService.shower]['0']}}</div>
-    <div>&nbsp; 1:&nbsp; {{meteorService.stat[meteorService.shower][1]}}</div>
-    <div>&nbsp; 2:&nbsp; {{meteorService.stat[meteorService.shower][2]}}</div>
-    <div>&nbsp; 3:&nbsp; {{meteorService.stat[meteorService.shower][3]}}</div>
-    <div>&nbsp; 4:&nbsp; {{meteorService.stat[meteorService.shower][4]}}</div>
-    <div>&nbsp; 5:&nbsp; {{meteorService.stat[meteorService.shower][5]}}</div>
-    <div>&nbsp; 6:&nbsp; {{meteorService.stat[meteorService.shower][6]}}</div>
-    <div>&nbsp; 7:&nbsp; {{meteorService.stat[meteorService.shower][7]}}</div>
-  </div>
-</div>
+ </div>
