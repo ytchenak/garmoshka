@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MeteorService } from '../meteor.service';
 import { LocalStorage } from 'ngx-webstorage';
-import { getInjectorIndex } from '@angular/core/src/render3/di';
 import { SettingFormComponent } from '../setting-form/setting-form.component';
 
 @Component({
@@ -94,7 +93,7 @@ export class MeteorInputComponent implements OnInit {
   }
 
 
-  private pasteFromClipboard(): void {
+  private pasteFromClipboard(): Promise<void> {
     
     return navigator['clipboard'].readText()
       .then(text => {
