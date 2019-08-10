@@ -43,7 +43,7 @@
         <div class="card-body">
           <div class="card-text">
             <ul> 
-              <li>Enter needed fields in <a href="/settings">Setting</a> tab</li>
+              <li>Enter needed fields in <a routerLink="/setting">Setting</a> tab</li>
               <li>Enter observation data in Input tab; <br>            
                   each row can contain a value in the following format: 
               </li>
@@ -60,8 +60,8 @@
                 <li>Limited magnitude (e.g Lm=6.1)</li>
               </ul>
               <li>Download the calculated tabs in csv format as following:<br>
-                select Count Distribution tab, Export as CSV;<br>
-                do the same for Magnitude Distribution tab</li>
+                select <a routerLink="/count-distribution">Count Distribution</a> tab, Export as CSV;<br>
+                do the same for <a routerLink="/magnitude-distribution">Magnitude Distribution</a> tab</li>
               <li>Navigate to <a href="https://www.imo.net/members/imo_observation/upload_observation">upload observation</a> 
                 and follow instraction to upload the two downloaded csv files</li>  
             </ul>
