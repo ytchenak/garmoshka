@@ -287,11 +287,17 @@ export class MeteorService {
     return s.length >= width ? s : new Array(width - s.length + 1).join('0') + s;
     }
   timeToStringDate_(time: Date): any {
+    const monthNames = [
+      'Jan', 'Feb', 'Mar',
+      'Apr', 'May', 'Jun', 'Jul',
+      'Aug', 'Sep', 'Oct',
+      'Nov', 'Dec'
+    ];
     var day = time.getUTCDate();
-    var month = time.getUTCMonth() + 1;
+    var month = monthNames[time.getUTCMonth()];
     var year = time.getUTCFullYear();
-    return this.pad_(day,2) + '/' + this.pad_(month,2) + '/' + year;
-    }
+    return month + ' ' + day + ' ' + year;
+  }
   addMagninudeDistribution_(period: number, startTime: Date, endTime: Date, stat: {}): void {
     var sheet = {}
     var names = this.getShowersNames_(stat);
