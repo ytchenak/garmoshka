@@ -71,7 +71,10 @@ export class MeteorService {
             this.curDate = this.incDays_(this.curDate);
             endTime = this.getTime_(dataValue);
           }
-  
+
+          if( this.calcTeif_(startTime, endTime) > 12)
+            throw new Error( "end time is less than start time:" + dataValue + " in Input column row " + (i+1) );
+
           if( skip ) {
             skip = false;
             continue; //skip result
