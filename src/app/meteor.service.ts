@@ -15,7 +15,7 @@ export class MeteorService {
   RaDiffInMin: number = 0.25;
   RaStartValue: number;
 
-  LmrRegex = /^[Ll]m=([0-9]+\.?[0-9]*)$/;
+  LmrRegex = /^[Ll][Mm]=([0-9]+\.?[0-9]*)$/;
 
   countDistribution: Array<Array<any>>;
   magnitudeDistribution: Array<Array<any>>;
