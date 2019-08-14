@@ -73,7 +73,10 @@ export class MeteorService {
           }
 
           if( this.calcTeif_(startTime, endTime) > 12)
-            throw new Error( "end time is less than start time:" + dataValue + " in Input column row " + (i+1) );
+            throw new Error( "end time is less than start time: " + dataValue + " in Input column row " + (i+1) );
+          
+          if( this.calcTeif_(startTime, endTime) === 0)
+            throw new Error( "end time is equal to start time: " + dataValue + " in Input column row " + (i+1) );
 
           if( skip ) {
             skip = false;
