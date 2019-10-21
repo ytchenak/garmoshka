@@ -16,6 +16,7 @@ export class MeteorService {
   RaStartValue: number;
 
   LmrRegex = /^[Ll][Mm]=([0-9]+\.?[0-9]*)$/;
+  DecRegex = /^[Dd][Ee][Cc]=([0-9]+\.?[0-9]*)$/;
 
   countDistribution: Array<Array<any>>;
   magnitudeDistribution: Array<Array<any>>;
@@ -57,7 +58,10 @@ export class MeteorService {
   
       } else if( this.isLm_(dataValue))  {  //Lm 
         this.Lm = this.getLm_(dataValue);
-  
+
+      } else if( this.isDec_(dataValue))  {  //Dec 
+        this.Dec = this.getDec_(dataValue);
+        
       } else if( this.isTime_(dataValue) ) { //if time, 
         if( !startTime ) { //first time
           startTime = this.getTime_(dataValue);
@@ -140,6 +144,12 @@ export class MeteorService {
   }
   getLm_(dataValue: string): number {
     return parseFloat(dataValue.match(this.LmrRegex)[1]);
+  }
+  isDec_(dataValue: string): boolean {
+    return this.DecRegex.test(dataValue);
+  }
+  getDec_(dataValue: string): number {
+    return parseFloat(dataValue.match(this.DecRegex)[1]);
   }
   initStat_(stat: {}): any {
     stat[this.shower] = {};
