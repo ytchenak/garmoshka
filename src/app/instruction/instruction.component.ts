@@ -7,7 +7,7 @@ import { SettingFormComponent } from '../setting-form/setting-form.component';
   styleUrls: ['./instruction.component.scss']
 })
 export class InstructionComponent implements OnInit {
-  private settings = new SettingFormComponent(); 
+  public settings = new SettingFormComponent(); 
   constructor() { }
 
   ngOnInit() {
