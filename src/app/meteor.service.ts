@@ -66,6 +66,10 @@ export class MeteorService {
       } else if( this.isDec_(dataValue))  {  //Dec 
         this.Dec = this.getDec_(dataValue);
         
+      } else if( this.isRa_(dataValue))  {  //Ra 
+        this.RaStartValue = this.getRa_(dataValue);
+        this.RaStartTime = endTime ? endTime : startTime;
+
       } else if( this.isTime_(dataValue) ) { //if time, 
         if( !startTime ) { //first time
           startTime = this.getTime_(dataValue);
@@ -98,9 +102,6 @@ export class MeteorService {
           
           period++;
         }
-      } else if( this.isRa_(dataValue))  {  //Ra 
-        this.RaStartValue = this.getRa_(dataValue);
-        this.RaStartTime = startTime;
         
       } else { //magnitude     
         if( this.isSporadic_(dataValue)) {
