@@ -35,6 +35,7 @@ export class SheetComponent implements OnInit {
   }
 
   ngOnInit() {
+    
     let input = new MeteorInputComponent(this.meteorService);
     this.meteorService.calc(input.dataValues);
 

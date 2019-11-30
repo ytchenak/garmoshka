@@ -151,7 +151,6 @@ export class MeteorService {
       this.magnitudeStat.push( {name: m, count: mags[m]})  
     }
     this.magnitudeStat = this.magnitudeStat.sort( (a,b) => +a.name - +b.name);
-    console.log(this.magnitudeStat);
 
 
   }
