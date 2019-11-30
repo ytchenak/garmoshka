@@ -4,6 +4,7 @@
     </li>
     <hr>
     <li *ngFor="let mag of meteorService.magnitudeStat" >
+        <span *ngIf="mag.name >= 0">&nbsp;</span>
         {{mag.name}}: {{mag.count}}
     </li>
 </ul>

@@ -12,6 +12,7 @@ import { SheetComponent } from './sheet/sheet.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { InstructionComponent } from './instruction/instruction.component';
+import { HourToDegreeConverterComponent } from './hour-to-degree-converter/hour-to-degree-converter.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { InstructionComponent } from './instruction/instruction.component';
     SettingFormComponent,
     SheetComponent,
     StatisticsComponent,
-    InstructionComponent
+    InstructionComponent,
+    HourToDegreeConverterComponent
   ],
   imports: [
     BrowserModule,

@@ -17,7 +17,7 @@ export class MeteorService {
 
   LmrRegex = /^[Ll][Mm]=([0-9]+\.?[0-9]*)$/;
   DecRegex = /^[Dd][Ee][Cc]=([0-9]+\.?[0-9]*)$/;
-  RaRegex = /^[Rr][Aa]=([0-9]+)$/;
+  RaRegex = /^[Rr][Aa]=([0-9]+\.?[0-9]*)$/;
 
   countDistribution: Array<Array<any>>;
   magnitudeDistribution: Array<Array<any>>;
@@ -36,6 +36,7 @@ export class MeteorService {
    
     let stat = {};
     this.initStat_(stat);
+    this.stat = {};
     this.initStat_(this.stat);
     let startTime = null;
     let endTime = null;
@@ -138,12 +139,10 @@ export class MeteorService {
     let mags = {};
     for( const showerName in this.stat) {
       const magnitudes = this.stat[showerName];
-      if ( showerName !== 'SPO') {
-        for( let m in magnitudes) {
-          if( isNaN(mags[+m]))
-            mags[+m] = 0;
-          mags[m] += +magnitudes[m];
-        }
+      for( let m in magnitudes) {
+        if( isNaN(mags[+m]))
+          mags[+m] = 0;
+        mags[m] += +magnitudes[m];
       }
     }
     this.magnitudeStat = [];
@@ -202,14 +201,20 @@ export class MeteorService {
   initStat_(stat: {}): any {
     stat[this.shower] = {};
     for( var m= 0; m<this.showers.length; m++) {
-      stat[this.showers[m]] = {};
+      const name = this.showers[m];
+      if( name !== '') {
+        stat[name] = {};
+      }
     }
     stat['SPO'] = {};
   
     for( var i= -6; i<=7; i++) {
       stat[this.shower][i] = 0;
       for( var m= 0; m<this.showers.length; m++) {
-        stat[this.showers[m]][i] = 0;
+        const name = this.showers[m];
+        if( name !== '') {
+          stat[name][i] = 0;
+        }
       }
       stat['SPO'][i] = 0;
     }
