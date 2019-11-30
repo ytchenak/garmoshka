@@ -1,0 +1,10 @@
+<ul>
+    <li *ngFor="let shower of meteorService.showersStat">
+        {{shower.name}}: {{shower.count}}
+    </li>
+    <hr>
+    <li *ngFor="let mag of meteorService.magnitudeStat" >
+        {{mag.name}}: {{mag.count}}
+    </li>
+</ul>
+

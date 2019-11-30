@@ -20,56 +20,11 @@
     >
   </ag-grid-angular>
   </div>
-  <div class="col-m-2 mx-4">
-    <div>{{meteorService.shower}}: {{meteorService.showerCount}}</div>
-    <div>SPO: {{meteorService.spoCount}}</div>
-    <p></p>
-    <div>-6:&nbsp; {{meteorService.stat[meteorService.shower][-6]}}</div>
-    <div>-5:&nbsp; {{meteorService.stat[meteorService.shower][-5]}}</div>
-    <div>-4:&nbsp; {{meteorService.stat[meteorService.shower][-4]}}</div>
-    <div>-3:&nbsp; {{meteorService.stat[meteorService.shower][-3]}}</div>
-    <div>-2:&nbsp; {{meteorService.stat[meteorService.shower][-2]}}</div>
-    <div>-1:&nbsp; {{meteorService.stat[meteorService.shower][-1]}}</div>
-    <div>&nbsp; 0:&nbsp; {{meteorService.stat[meteorService.shower]['0']}}</div>
-    <div>&nbsp; 1:&nbsp; {{meteorService.stat[meteorService.shower][1]}}</div>
-    <div>&nbsp; 2:&nbsp; {{meteorService.stat[meteorService.shower][2]}}</div>
-    <div>&nbsp; 3:&nbsp; {{meteorService.stat[meteorService.shower][3]}}</div>
-    <div>&nbsp; 4:&nbsp; {{meteorService.stat[meteorService.shower][4]}}</div>
-    <div>&nbsp; 5:&nbsp; {{meteorService.stat[meteorService.shower][5]}}</div>
-    <div>&nbsp; 6:&nbsp; {{meteorService.stat[meteorService.shower][6]}}</div>
-    <div>&nbsp; 7:&nbsp; {{meteorService.stat[meteorService.shower][7]}}</div>
+  <div class="col-m-2 mx-4 mt-5">
+    <b>Statistics:</b>
+    <app-statistics></app-statistics>
   </div>
   <div class="col-m-8 h-100">
-      <div class="card m-5">
-        <div class="card-body">
-          <div class="card-text">
-            <ul> 
-              <li>Enter needed fields in <a routerLink="/setting">Setting</a> tab</li>
-              <li>Enter observation data in Input tab; <br>            
-                  each row can contain a value in the following format: 
-              </li>
-              <ul>
-                <li>Time in format HHMM</li>
-                <li>Meteor magnitude from -6 until 7</li>
-                <ul>
-                  <li>For sporadic add minus at end (e.g 3-)</li>
-                  <li>For minor shower add at end a meteor code of the shower (e.g.: 3CAP)</li>
-                  see <a href="https://www.imo.net/members/imo_showers/working_shower_list">shower list</a>
-                </ul>
-                <li>For observation break enter two slashes (//)</li>
-                <li>For field of obstruction enter a percent (e.g. 20%)</li>
-                <li>Limited magnitude (e.g Lm=6.1)</li>
-                <li>Declination in degrees(e.g Dec=35)</li>
-                <li>Right Ascension in degrees(R.A.) (e.g RA=275)</li>
-              </ul>
-              <li>Download the calculated tabs in csv format as following:<br>
-                select <a routerLink="/count-distribution">Count Distribution</a> tab, Export as CSV;<br>
-                do the same for <a routerLink="/magnitude-distribution">Magnitude Distribution</a> tab</li>
-              <li>Navigate to <a href="https://www.imo.net/members/imo_observation/upload_observation">upload observation</a> 
-                and follow instraction to upload the two downloaded csv files</li>  
-            </ul>
-          </div>
-        </div>
-      </div>
+    <app-instruction></app-instruction>
   </div>
  </div>

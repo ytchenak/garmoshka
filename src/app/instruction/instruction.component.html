@@ -1,0 +1,32 @@
+<div class="card m-5">
+        <div class="card-body">
+            <h5 class="card-title">Instruction:</h5>
+            <div class="card-text">
+            <ul> 
+              <li>Enter needed fields in <a routerLink="/setting">Setting</a> tab</li>
+              <li>Enter observation data in Input tab; <br>            
+                  each row can contain a value in the following format: 
+              </li>
+              <ul>
+                <li>Time in format HHMM</li>
+                <li>For field of obstruction enter a percent (e.g. 20%)</li>
+                <li>LM (Limited magnitude) (e.g Lm=6.1)</li>
+                <li>Dec (Declination in degrees) (e.g Dec=35)</li>
+                <li>RA (Right Ascension in degrees) (e.g RA=275)</li>
+                <li>Meteor magnitude from -6 until 7</li>
+                <ul>
+                  <li>For sporadic add minus at end (e.g 3-)</li>
+                  <li>For minor shower add at end a meteor code of the shower (e.g.: 3CAP)</li>
+                  from list of minor showers in settings: {{settings.showers}}
+                </ul>
+                <li>For observation break enter two slashes (//)</li>
+              </ul>
+              <li>Download the calculated tabs in csv format as following:<br>
+                select <a routerLink="/count-distribution">Count Distribution</a> tab, export as CSV;<br>
+                select <a routerLink="/magnitude-distribution">Magnitude Distribution</a> tab, export as CSV;</li>
+              <li>Navigate to IMO <a href="https://www.imo.net/members/imo_observation/upload_observation">upload observation</a> 
+                and follow instraction to upload the two downloaded csv files</li>  
+            </ul>
+          </div>
+        </div>
+      </div>

@@ -24,6 +24,8 @@ export class MeteorService {
   spoCount: number;
   showerCount: number;
   stat = {};
+  showersStat = [];
+  magnitudeStat = [];
 
   constructor() { }
 
@@ -96,6 +98,7 @@ export class MeteorService {
           this.addCountDistribution_(period, startTime, endTime, stat);
           this.addMagninudeDistribution_(period, startTime, endTime, stat);
           this.initStat_(stat);
+          
           period++;
         }
       } else { //magnitude     
@@ -118,7 +121,42 @@ export class MeteorService {
       }
       //next
     }
+    this.calcStatistics_();
   }
+
+  calcStatistics_() {
+    this.showersStat = [];
+    for( const showerName in this.stat) {
+      let count = 0;
+      const magnitudes = this.stat[showerName];
+      for( let m in magnitudes) {
+        count += magnitudes[m];
+      }
+      this.showersStat.push( {name: showerName, count: count});
+    }
+    
+    let mags = {};
+    for( const showerName in this.stat) {
+      const magnitudes = this.stat[showerName];
+      if ( showerName !== 'SPO') {
+        for( let m in magnitudes) {
+          if( isNaN(mags[+m]))
+            mags[+m] = 0;
+          mags[m] += +magnitudes[m];
+        }
+      }
+    }
+    this.magnitudeStat = [];
+    for (const m in mags ) {
+      this.magnitudeStat.push( {name: m, count: mags[m]})  
+    }
+    this.magnitudeStat = this.magnitudeStat.sort( (a,b) => +a.name - +b.name);
+    console.log(this.magnitudeStat);
+
+
+  }
+
+  
   readSetting_() {
     let setting = new SettingFormComponent();
     this.shower = setting.shower;

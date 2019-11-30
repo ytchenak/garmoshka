@@ -10,13 +10,17 @@ import { FormsModule }   from '@angular/forms';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import { SheetComponent } from './sheet/sheet.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { StatisticsComponent } from './statistics/statistics.component';
+import { InstructionComponent } from './instruction/instruction.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MeteorInputComponent,
     SettingFormComponent,
-    SheetComponent
+    SheetComponent,
+    StatisticsComponent,
+    InstructionComponent
   ],
   imports: [
     BrowserModule,
