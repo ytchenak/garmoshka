@@ -7,8 +7,9 @@ import { AgGridModule } from '@ag-grid-community/angular';
 import { MeteorInputComponent } from './meteor-input/meteor-input.component';
 import { SettingFormComponent } from './setting-form/setting-form.component';
 import { FormsModule }   from '@angular/forms';
-import {NgxWebstorageModule} from 'ngx-webstorage';
+import { NgxWebstorageModule } from 'ngx-webstorage';
 import { SheetComponent } from './sheet/sheet.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { SheetComponent } from './sheet/sheet.component';
     AppRoutingModule,
     AgGridModule.withComponents([]),
     NgxWebstorageModule.forRoot(),
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

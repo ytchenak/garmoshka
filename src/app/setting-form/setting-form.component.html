@@ -65,7 +65,13 @@
   <div class="form-group row">
     <label for="RaStartValue" class="col-4 col-form-label">RA start value</label> 
     <div class="col-8">
-      <input [(ngModel)]="RaStartValue" id="RaStartValue" name="RaStartValue" type="text" class="form-control">
+      <div class="input-group">
+        <input [(ngModel)]="RaStartValue" id="RaStartValue" name="RaStartValue" type="text" class="form-control">
+        <div class="input-group-append">
+          <span class="input-group-text">°</span>  
+      </div>
     </div>
+
+</div>
   </div> 
 </form>
