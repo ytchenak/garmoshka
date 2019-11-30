@@ -1,2 +1,2 @@
 git push
-ng build --prod --base-href https://ytchenak.github.io/garmoshka/;ngh -d dist/garmoshka
+ng build --prod --base-href /garmoshka/;ngh -d dist/garmoshka
