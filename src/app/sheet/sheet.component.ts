@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { SettingFormComponent } from '../setting-form/setting-form.component';
 import { MeteorInputComponent } from '../meteor-input/meteor-input.component';
 import { saveAs } from 'file-saver';
+import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
+import { Module } from '@ag-grid-community/core';
+
 
 @Component({
   selector: 'app-sheet',
@@ -16,6 +19,7 @@ export class SheetComponent implements OnInit {
   rowData = [];
 
   gridApi: any;
+  modules: Module[] = [ClientSideRowModelModule];
 
   constructor(
     private meteorService: MeteorService,

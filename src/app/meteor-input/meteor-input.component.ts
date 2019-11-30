@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MeteorService } from '../meteor.service';
 import { LocalStorage } from 'ngx-webstorage';
 import { SettingFormComponent } from '../setting-form/setting-form.component';
+import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
+import { Module } from '@ag-grid-community/core';
 
 @Component({
   selector: 'app-meteor-input',
@@ -9,6 +11,7 @@ import { SettingFormComponent } from '../setting-form/setting-form.component';
   styleUrls: ['./meteor-input.component.scss']
 })
 export class MeteorInputComponent implements OnInit {
+  modules: Module[] = [ClientSideRowModelModule];
 
   columnDefs = [
     {headerName: '#', valueGetter: this.getIndex, editable: false, width: 50},

@@ -15,7 +15,9 @@
     [columnDefs]="columnDefs"
     [enterMovesDownAfterEdit]="true"
     (gridReady)="onGridReady($event)"
-    (cellValueChanged)="onCellValueChanged($event)">
+    (cellValueChanged)="onCellValueChanged($event)"
+    [modules]="modules"
+    >
   </ag-grid-angular>
   </div>
   <div class="col-m-2 mx-4">
