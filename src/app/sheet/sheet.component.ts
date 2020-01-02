@@ -5,6 +5,7 @@ import { SettingFormComponent } from '../setting-form/setting-form.component';
 import { MeteorInputComponent } from '../meteor-input/meteor-input.component';
 import { saveAs } from 'file-saver';
 import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
+import { CsvExportModule } from '@ag-grid-community/csv-export';
 import { Module } from '@ag-grid-community/core';
 
 
@@ -19,7 +20,7 @@ export class SheetComponent implements OnInit {
   rowData = [];
 
   gridApi: any;
-  modules: Module[] = [ClientSideRowModelModule];
+  modules: Module[] = [ClientSideRowModelModule, CsvExportModule];
 
   constructor(
     private meteorService: MeteorService,
