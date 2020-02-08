@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MeteorService } from '../meteor.service';
 import {LocalStorage} from 'ngx-webstorage';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-setting-form',
@@ -27,7 +27,7 @@ export class SettingFormComponent implements OnInit {
     if( !this.showers)
       this.showers = '';
     if( !this.curDate)
-      this.curDate = '11/08/2018';
+      this.curDate = moment(new Date()).format('DD/MM/YYYY');;
     if( !this.F )
       this.F = '0';
     if( !this.Lm)
