@@ -56,12 +56,21 @@
       </div>
     </div>
   </div>
+
   <div class="form-group row">
     <label for="RaStartTime" class="col-2 col-form-label">RA local start time</label> 
     <div class="col-2">
-      <input [(ngModel)]="RaStartTime" id="RaStartTime" name="RaStartTime" placeholder="HHMM" type="text" class="form-control">
+      <input [(ngModel)]="RaStartTime" id="RaStartTime" name="RaStartTime" #RaStartTimeRef=ngModel 
+      placeholder="HHMM" type="text" pattern="\d+" class="form-control">
     </div>
+
+    <div *ngIf="RaStartTimeRef.invalid && (RaStartTimeRef.dirty || RaStartTimeRef.touched)"
+      class="alert alert-danger">
+      time should be in format HHMM
+    </div>
+    
   </div>
+
   <div class="form-group row">
     <label for="RaStartValue" class="col-2 col-form-label">RA start value</label> 
     <div class="col-2">
