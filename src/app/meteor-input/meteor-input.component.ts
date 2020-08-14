@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MeteorService } from '../meteor.service';
-import { LocalStorage } from 'ngx-webstorage';
+import { LocalStorage, LocalStorageService } from 'ngx-webstorage';
 import { SettingFormComponent } from '../setting-form/setting-form.component';
 import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
 import { Module } from '@ag-grid-community/core';
@@ -24,12 +24,15 @@ export class MeteorInputComponent implements OnInit {
 
   private gridApi;
 
-  @LocalStorage() rowData: Array<{data: string}>;
+  rowData: Array<{data: string}>;
 
-  constructor(public meteorService: MeteorService) { 
+  constructor(public meteorService: MeteorService,
+    public storage: LocalStorageService) { 
   }
 
   ngOnInit() {
+    this.rowData = this.storage.retrieve('rowdata');
+
     if( !this.rowData) {
       this.rowData = this.cleanRowData();
       new SettingFormComponent(); //ensure that setting will be written in localstorage
@@ -57,6 +60,7 @@ export class MeteorInputComponent implements OnInit {
     if (confirm('All data will be deleted, are you sure?')) {
       this.rowData = this.cleanRowData();
       this.gridApi.setRowData(this.rowData);
+      this.storage.store('rowdata', this.rowData);
       this.calc();
     }
   }
@@ -65,6 +69,7 @@ export class MeteorInputComponent implements OnInit {
     let index = this.gridApi.getFocusedCell().rowIndex;
     this.rowData.splice(index+1, 0, {data: ''});
     this.gridApi.setRowData(this.rowData);
+    this.storage.store('rowdata', this.rowData);
     this.gridApi.setFocusedCell(index, "data");
     this.gridApi.ensureIndexVisible(index, 'middle')
   }
@@ -73,6 +78,7 @@ export class MeteorInputComponent implements OnInit {
     let index = this.gridApi.getFocusedCell().rowIndex;
     this.rowData.splice(index, 1);
     this.gridApi.setRowData(this.rowData);
+    this.storage.store('rowdata', this.rowData);
     this.gridApi.setFocusedCell(index, "data");
     this.gridApi.ensureIndexVisible(index, 'middle')
   }
@@ -82,8 +88,7 @@ export class MeteorInputComponent implements OnInit {
   }
 
   onCellValueChanged($event) {
-    //trigger save the dat in web storage    
-    this.rowData = this.rowData;
+    this.storage.store('rowdata', this.rowData);
     this.calc();
   }
 
@@ -109,7 +114,7 @@ export class MeteorInputComponent implements OnInit {
           this.rowData[i] = {data: ''}
         }
         this.gridApi.setRowData(this.rowData);
-        this.rowData = this.rowData;
+        this.storage.store('rowdata', this.rowData);
         this.calc();
       })
     .catch(err => {

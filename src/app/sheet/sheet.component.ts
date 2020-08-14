@@ -7,6 +7,7 @@ import { saveAs } from 'file-saver';
 import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
 import { CsvExportModule } from '@ag-grid-community/csv-export';
 import { Module } from '@ag-grid-community/core';
+import { LocalStorageService } from 'ngx-webstorage';
 
 
 @Component({
@@ -24,6 +25,7 @@ export class SheetComponent implements OnInit {
 
   constructor(
     private meteorService: MeteorService,
+    private storage: LocalStorageService,
     private router: Router) { 
   }
 
@@ -37,7 +39,7 @@ export class SheetComponent implements OnInit {
 
   ngOnInit() {
     
-    let input = new MeteorInputComponent(this.meteorService);
+    let input = new MeteorInputComponent(this.meteorService, this.storage);
     this.meteorService.calc(input.dataValues);
 
     let data = this.getData();
