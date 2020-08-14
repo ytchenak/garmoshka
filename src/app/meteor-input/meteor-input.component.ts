@@ -27,12 +27,11 @@ export class MeteorInputComponent implements OnInit {
   rowData: Array<{data: string}>;
 
   constructor(public meteorService: MeteorService,
-    public storage: LocalStorageService) { 
+    public storage: LocalStorageService) {
+      this.rowData = this.storage.retrieve('rowdata');
   }
 
   ngOnInit() {
-    this.rowData = this.storage.retrieve('rowdata');
-
     if( !this.rowData) {
       this.rowData = this.cleanRowData();
       new SettingFormComponent(); //ensure that setting will be written in localstorage
