@@ -1,5 +1,9 @@
 <div class="row">
   <div class="col-m-2">
+  <div *ngIf="error"
+    class="alert alert-danger">
+    time should be in format HHMM
+  </div>
 
   <div class="btn-group mx-2">
     <button class="btn btn-outline-primary fa fa-trash" (click)="onClean()"    title="delete all"></button>

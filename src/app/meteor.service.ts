@@ -51,12 +51,16 @@ export class MeteorService {
   
       if( dataValue === '' ) {
         continue;
+
+      } else if( i > 0 && dataValues[i-1] === '//' && !this.isTime_(dataValue)) {
+        throw Error('Observation break without start time in input column row ' + (i+1));
+
       }
       else if( dataValue === '//' ) {        //skip current periosd
         if( !this.isTime_(dataValues[i-1]) )
-          throw Error('Observation break without start time in input column row ' + (i+1));
+          throw Error('Observation break without end time in input column row ' + (i+1));
         skip = true;
-        
+
       } else if( /^\d+%$/.test(dataValue) ) {  //field of obstruction in percent 
         this.F = parseFloat(dataValue.slice(0, -1));
   
@@ -267,8 +271,9 @@ export class MeteorService {
     this.magnitudeDistribution[1][17] = '6';
     this.magnitudeDistribution[1][18] = '7';
   }
+  
   isTime_(dataValue: string): any {
-    return typeof(dataValue) === 'string' && /^\d{4}$/.test(dataValue);
+    return typeof(dataValue) === 'string' && /^(?:[01]\d|2[0-3])[0-5]\d$/.test(dataValue);
   }
   getTime_(dataValue: string): Date {
     var hours = parseInt(dataValue.slice(0,2));

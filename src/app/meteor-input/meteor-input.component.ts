@@ -4,6 +4,8 @@ import { LocalStorage, LocalStorageService } from 'ngx-webstorage';
 import { SettingFormComponent } from '../setting-form/setting-form.component';
 import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
 import { Module } from '@ag-grid-community/core';
+import { CustomCellEditorComponent } from '../custom-cell-editor-component/custom-cell-editor-component.component';
+
 
 @Component({
   selector: 'app-meteor-input',
@@ -12,10 +14,16 @@ import { Module } from '@ag-grid-community/core';
 })
 export class MeteorInputComponent implements OnInit {
   modules: Module[] = [ClientSideRowModelModule];
+  error = '';
 
   columnDefs = [
     {headerName: '#', valueGetter: this.getIndex, editable: false, width: 50},
-    {headerName: '', field: 'data', editable: true, width: 110, cellStyle: {'font-size': '20px'}},
+    {
+      headerName: '', field: 'data', editable: true, width: 110,
+      cellStyle: {'font-size': '20px'},
+      // cellEditor: 'agNumberCellEditor',
+      // cellEditorFramework: CustomCellEditorComponent,
+    },
   ];
 
   getIndex(params) {
@@ -93,9 +101,11 @@ export class MeteorInputComponent implements OnInit {
 
   calc() {
     try {
+      this.error = '';
       this.meteorService.calc(this.dataValues);
     } catch(e) {
-      alert(e);
+      this.error = e;
+      alert(e)
     }
   }
 
