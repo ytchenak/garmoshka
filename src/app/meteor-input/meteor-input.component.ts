@@ -4,8 +4,6 @@ import { LocalStorage, LocalStorageService } from 'ngx-webstorage';
 import { SettingFormComponent } from '../setting-form/setting-form.component';
 import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
 import { Module } from '@ag-grid-community/core';
-import { CustomCellEditorComponent } from '../custom-cell-editor-component/custom-cell-editor-component.component';
-
 
 @Component({
   selector: 'app-meteor-input',
@@ -21,8 +19,6 @@ export class MeteorInputComponent implements OnInit {
     {
       headerName: '', field: 'data', editable: true, width: 110,
       cellStyle: {'font-size': '20px'},
-      // cellEditor: 'agNumberCellEditor',
-      // cellEditorFramework: CustomCellEditorComponent,
     },
   ];
 
