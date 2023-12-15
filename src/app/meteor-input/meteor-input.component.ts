@@ -91,6 +91,9 @@ export class MeteorInputComponent implements OnInit {
   }
 
   onCellValueChanged($event) {
+    // change row data to be upper-case, for all array
+    this.rowData = this.rowData.map( x => {return {data: x.data.toUpperCase()};});
+
     this.storage.store('rowdata', this.rowData);
     this.calc();
   }
