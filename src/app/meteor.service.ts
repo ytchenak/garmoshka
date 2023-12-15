@@ -26,6 +26,7 @@ export class MeteorService {
   stat = {};
   showersStat = [];
   magnitudeStat = [];
+  currentRow: number;
 
   constructor() { }
 
@@ -47,22 +48,26 @@ export class MeteorService {
     this.spoCount = 0;
     this.showerCount = 0;   
     for( let i=0; i<dataValues.length; i++ ) {
+      this.currentRow = i+1;
       let dataValue = dataValues[i];
   
       if( dataValue === '' ) {
         continue;
 
       } else if( i > 0 && dataValues[i-1] === '//' && !this.isTime_(dataValue)) {
-        throw Error('Observation break without start time in input column row ' + (i+1));
+        throw Error('Observation break without start time in input column row ' + this.currentRow);
 
       }
       else if( dataValue === '//' ) {        //skip current periosd
         if( !this.isTime_(dataValues[i-1]) )
-          throw Error('Observation break without end time in input column row ' + (i+1));
+          throw Error('Observation break without end time in input column row ' + this.currentRow);
         skip = true;
 
       } else if( /^\d+%$/.test(dataValue) ) {  //field of obstruction in percent 
         this.F = parseFloat(dataValue.slice(0, -1));
+        if (this.F >= 80) {
+          throw Error('Field of obstruction is too large: ' + dataValue + ' in input column row ' + this.currentRow);
+        }
   
       } else if( this.isLm_(dataValue))  {  //Lm 
         this.Lm = this.getLm_(dataValue);
@@ -89,10 +94,10 @@ export class MeteorService {
           }
 
           if( this.calcTeif_(startTime, endTime) > 12)
-            throw new Error( "end time is less than start time: " + dataValue + " in Input column row " + (i+1) );
+            throw new Error( "end time is less than start time: " + dataValue + " in Input column row " + this.currentRow );
           
           if( this.calcTeif_(startTime, endTime) === 0)
-            throw new Error( "end time is equal to start time: " + dataValue + " in Input column row " + (i+1) );
+            throw new Error( "end time is equal to start time: " + dataValue + " in Input column row " + this.currentRow );
 
           if( skip ) {
             skip = false;
@@ -122,7 +127,7 @@ export class MeteorService {
           this.addMeteorToStat_(stat, name, mag);        
         
         } else { //unknow value -- show error
-          throw new Error( "Unkknow value " + dataValue + " in Input column row " + (i+1) );
+          throw new Error( "Unkknow value " + dataValue + " in Input column row " + this.currentRow);
         }
       }
       //next
@@ -297,7 +302,7 @@ export class MeteorService {
   addMeteorToStat_(stat: {}, name: string, mag: string) {
     let nmag = parseInt(mag);
     if( nmag < -6 || nmag > 7 )
-      throw Error('Meteor magnitude ' + mag + ' no in range from -6 to 7. Please report meteors with magnitude less -6 in fairball forum');
+      throw Error('Meteor magnitude ' + mag + ' no in range from -6 to 7. Please report meteors with magnitude less -6 in fairball forum. Input column row ' + this.currentRow);
     stat[name][mag]++;  
     this.stat[name][mag]++;  
           
