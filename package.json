@@ -27,7 +27,7 @@
     "bootstrap": "4.4.1",
     "file-saver": "2.0.2",
     "firebase": "^10.7.1",
-    "moment": "2.24.0",
+    "moment": "2.30.1",
     "ngx-webstorage": "5.0.0",
     "rxjs": "6.5.5",
     "tslib": "1.11.1",
