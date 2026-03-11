@@ -1,13 +1,56 @@
-.stat-list {
-  list-style: none;
-  padding: 0;
+:host {
+  display: block;
+}
+
+.stat-section {
   margin: 0.5rem 0;
   font-family: 'Courier New', Courier, monospace;
   font-size: 0.875rem;
 }
 
-.stat-list li {
+.stat-row {
+  display: flex;
+  align-items: center;
   padding: 0.125rem 0;
+  gap: 0;
+}
+
+.stat-name {
+  text-align: right;
+  min-width: 2.5rem;
+  flex-shrink: 0;
+}
+
+.mag-name {
+  min-width: 1.75rem;
+}
+
+.stat-colon {
+  flex-shrink: 0;
+  margin: 0 0.25rem;
+}
+
+.stat-value {
+  min-width: 2rem;
+  flex-shrink: 0;
+}
+
+.stat-bar-container {
+  flex: 1;
+  height: 0.75rem;
+  background: var(--color-bg);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-left: 0.25rem;
+}
+
+.stat-bar {
+  display: block;
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: 2px;
+  transition: width 0.2s ease;
+  min-width: 0;
 }
 
 hr {

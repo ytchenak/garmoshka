@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MeteorService } from '../meteor.service';
 import { StorageService } from '../storage.service';
@@ -13,7 +13,12 @@ import { InstructionComponent } from '../instruction/instruction.component';
 })
 export class MeteorInputComponent implements OnInit {
   error = '';
+  errorRow = 0;
   inputText = '';
+  lineNumbers: number[] = [1];
+
+  @ViewChild('lineGutter') lineGutter!: ElementRef<HTMLDivElement>;
+  @ViewChild('dataTextarea') dataTextarea!: ElementRef<HTMLTextAreaElement>;
 
   constructor(
     public meteorService: MeteorService,
@@ -25,6 +30,7 @@ export class MeteorInputComponent implements OnInit {
     if (rowData) {
       this.inputText = rowData.map((r) => r.data).join('\n');
     }
+    this.updateLineNumbers();
     this.calc();
   }
 
@@ -32,7 +38,13 @@ export class MeteorInputComponent implements OnInit {
     return this.inputText.split('\n');
   }
 
+  updateLineNumbers(): void {
+    const count = this.inputText === '' ? 1 : this.inputText.split('\n').length;
+    this.lineNumbers = Array.from({ length: count }, (_, i) => i + 1);
+  }
+
   onInputChange(): void {
+    this.updateLineNumbers();
     const rowData = this.dataValues.map((d) => ({ data: d }));
     this.storage.setRowData(rowData);
     this.calc();
@@ -41,6 +53,7 @@ export class MeteorInputComponent implements OnInit {
   onClean(): void {
     if (confirm('All data will be deleted, are you sure?')) {
       this.inputText = '';
+      this.updateLineNumbers();
       this.storage.setRowData([]);
       this.calc();
     }
@@ -49,10 +62,23 @@ export class MeteorInputComponent implements OnInit {
   calc(): void {
     try {
       this.error = '';
+      this.errorRow = 0;
       this.meteorService.calc(this.dataValues);
     } catch (e) {
       this.error = String(e);
+      const match = this.error.match(/row\s+(\d+)/i);
+      this.errorRow = match ? parseInt(match[1], 10) : 0;
     }
+  }
+
+  syncScroll(): void {
+    if (this.lineGutter && this.dataTextarea) {
+      this.lineGutter.nativeElement.scrollTop = this.dataTextarea.nativeElement.scrollTop;
+    }
+  }
+
+  onScroll(): void {
+    this.syncScroll();
   }
 
   async onPasteAll(): Promise<void> {

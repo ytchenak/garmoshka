@@ -61,4 +61,41 @@ test.describe('Meteor Input', () => {
     await page.goto('/meteor-input');
     await expect(page.locator('app-instruction')).toContainText('Instruction');
   });
+
+  test('should display line numbers', async ({ page }) => {
+    await page.goto('/meteor-input');
+    await page.locator('#meteor-data').fill('2100\n3\n2200');
+    const gutter = page.locator('.line-gutter');
+    await expect(gutter).toBeVisible();
+    await expect(gutter).toContainText('1');
+    await expect(gutter).toContainText('2');
+    await expect(gutter).toContainText('3');
+  });
+
+  test('should highlight error line number in red', async ({ page }) => {
+    await page.goto('/meteor-input');
+    await page.locator('#meteor-data').fill('2100\nINVALID\n2200');
+    const errorLine = page.locator('.line-error');
+    await expect(errorLine).toBeVisible();
+    await expect(errorLine).toContainText('2');
+  });
+
+  test('should show aligned statistics with colons', async ({ page }) => {
+    await page.goto('/meteor-input');
+    await page.locator('#meteor-data').fill('2100\n3\n2-\n2200');
+    const statRows = page.locator('.stat-row');
+    await expect(statRows.first()).toBeVisible();
+    const colons = page.locator('.stat-colon');
+    expect(await colons.count()).toBeGreaterThan(0);
+  });
+
+  test('should show histogram bars for magnitude stats', async ({ page }) => {
+    await page.goto('/meteor-input');
+    await page.locator('#meteor-data').fill('2100\n3\n2-\n2200');
+    const barContainers = page.locator('.stat-bar-container');
+    await expect(barContainers.first()).toBeVisible();
+    // Verify that at least one bar has non-zero width (the magnitudes with counts)
+    const bars = page.locator('.stat-bar');
+    expect(await bars.count()).toBeGreaterThan(0);
+  });
 });

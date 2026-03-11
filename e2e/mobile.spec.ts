@@ -69,4 +69,29 @@ test.describe('Mobile Responsiveness', () => {
     const tableWrapper = page.locator('.table-wrapper');
     await expect(tableWrapper).toBeVisible();
   });
+
+  test('should overlay mobile menu without pushing content', async ({ page }) => {
+    await page.goto('/meteor-input');
+    const mainContent = page.locator('.main-content');
+    const mainTopBefore = await mainContent.boundingBox();
+
+    await page.click('.navbar-toggle');
+    await expect(page.locator('.nav-links')).toHaveClass(/open/);
+
+    const mainTopAfter = await mainContent.boundingBox();
+    expect(mainTopAfter!.y).toBe(mainTopBefore!.y);
+  });
+
+  test('should show line numbers on mobile', async ({ page }) => {
+    await page.goto('/meteor-input');
+    await page.locator('#meteor-data').fill('2100\n3\n2200');
+    const gutter = page.locator('.line-gutter');
+    await expect(gutter).toBeVisible();
+  });
+
+  test('should have numeric input mode on textarea', async ({ page }) => {
+    await page.goto('/meteor-input');
+    const textarea = page.locator('#meteor-data');
+    await expect(textarea).toHaveAttribute('inputmode', 'numeric');
+  });
 });

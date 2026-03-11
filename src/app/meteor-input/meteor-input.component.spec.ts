@@ -56,4 +56,35 @@ describe('MeteorInputComponent', () => {
     component.calc();
     expect(component.error).toContain('Unknown value');
   });
+
+  it('should initialize line numbers to [1]', () => {
+    expect(component.lineNumbers).toEqual([1]);
+  });
+
+  it('should update line numbers on input change', () => {
+    component.inputText = '2100\n3\n2200';
+    component.onInputChange();
+    expect(component.lineNumbers).toEqual([1, 2, 3]);
+  });
+
+  it('should extract error row number from error message', () => {
+    component.inputText = '2100\nINVALID\n2200';
+    component.calc();
+    expect(component.errorRow).toBe(2);
+  });
+
+  it('should set errorRow to 0 on successful calc', () => {
+    component.inputText = '2100\n3\n2200';
+    component.calc();
+    expect(component.errorRow).toBe(0);
+  });
+
+  it('should reset line numbers on clean', () => {
+    spyOn(window, 'confirm').and.returnValue(true);
+    component.inputText = '2100\n3\n2200';
+    component.updateLineNumbers();
+    expect(component.lineNumbers.length).toBe(3);
+    component.onClean();
+    expect(component.lineNumbers).toEqual([1]);
+  });
 });

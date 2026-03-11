@@ -11,14 +11,24 @@
     </div>
 
     <label class="sr-only" for="meteor-data">Meteor observation data</label>
-    <textarea
-      id="meteor-data"
-      class="data-textarea"
-      [(ngModel)]="inputText"
-      (ngModelChange)="onInputChange()"
-      placeholder="Enter observation data, one value per line...&#10;e.g.:&#10;2100&#10;3&#10;2-&#10;2200"
-      spellcheck="false"
-    ></textarea>
+    <div class="editor-container">
+      <div class="line-gutter" #lineGutter>
+        @for (num of lineNumbers; track num) {
+          <div class="line-number" [class.line-error]="num === errorRow">{{ num }}</div>
+        }
+      </div>
+      <textarea
+        id="meteor-data"
+        #dataTextarea
+        class="data-textarea"
+        inputmode="numeric"
+        [(ngModel)]="inputText"
+        (ngModelChange)="onInputChange()"
+        (scroll)="onScroll()"
+        placeholder="Enter observation data, one value per line..."
+        spellcheck="false"
+      ></textarea>
+    </div>
   </div>
 
   <div class="side-panels">
