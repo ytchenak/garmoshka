@@ -1,6 +1,14 @@
-@media screen and (max-width: 800px) {
-  .col-2 {
-    flex: 0 0 50%;
-    max-width: 50%;
+.settings-form {
+  max-width: 600px;
+  padding: 1rem 0;
+}
+
+.settings-form .form-control {
+  max-width: 300px;
+}
+
+@media (max-width: 768px) {
+  .settings-form .form-control {
+    max-width: 100%;
   }
 }

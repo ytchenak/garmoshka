@@ -1,87 +1,76 @@
 import { Component, OnInit } from '@angular/core';
-import { MeteorService } from '../meteor.service';
 import { Router } from '@angular/router';
-import { SettingFormComponent } from '../setting-form/setting-form.component';
-import { MeteorInputComponent } from '../meteor-input/meteor-input.component';
+import { MeteorService } from '../meteor.service';
+import { StorageService } from '../storage.service';
 import { saveAs } from 'file-saver';
-import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
-import { CsvExportModule } from '@ag-grid-community/csv-export';
-import { Module } from '@ag-grid-community/core';
-import { LocalStorageService } from 'ngx-webstorage';
-
 
 @Component({
   selector: 'app-sheet',
+  imports: [],
   templateUrl: './sheet.component.html',
-  styleUrls: ['./sheet.component.scss']
+  styleUrl: './sheet.component.scss',
 })
 export class SheetComponent implements OnInit {
-
-  columnDefs = [];
-  rowData = [];
-
-  gridApi: any;
-  modules: Module[] = [ClientSideRowModelModule, CsvExportModule];
+  headers: (string | number | undefined)[] = [];
+  rows: Array<Array<string | number | undefined>> = [];
+  title = '';
 
   constructor(
     private meteorService: MeteorService,
-    private storage: LocalStorageService,
-    private router: Router) { 
-  }
+    private storage: StorageService,
+    private router: Router,
+  ) {}
 
-  getData() {
-    if( this.router.url === '/count-distribution')
+  getData(): Array<Array<string | number | undefined>> | null {
+    if (this.router.url === '/count-distribution') {
       return this.meteorService.countDistribution;
-    else if( this.router.url === '/magnitude-distribution')
+    } else if (this.router.url === '/magnitude-distribution') {
       return this.meteorService.magnitudeDistribution;
-    else return null;
+    }
+    return null;
   }
 
-  ngOnInit() {
-    
-    let input = new MeteorInputComponent(this.meteorService, this.storage);
-    this.meteorService.calc(input.dataValues);
+  ngOnInit(): void {
+    const rowData = this.storage.getRowData();
+    const dataValues = rowData ? rowData.map((r) => r.data) : [];
+    this.meteorService.calc(dataValues);
 
-    let data = this.getData();
-    for (let i = 1; i < data[1].length; i++) {
-      let minWidth = 0;
-      if( i<4)
-        minWidth = 100;
-      this.columnDefs.push( {
-        headerName: data[1][i],
-        minWidth: minWidth,
-        field: i.toLocaleString() 
-      });
+    if (this.router.url === '/count-distribution') {
+      this.title = 'Count Distribution';
+    } else if (this.router.url === '/magnitude-distribution') {
+      this.title = 'Magnitude Distribution';
     }
+
+    const data = this.getData();
+    if (!data) {
+      return;
+    }
+
+    if (data[1]) {
+      this.headers = data[1].slice(1);
+    }
+
     for (let i = 2; i < data.length; i++) {
-      if( data[i][1] === undefined)
+      if (data[i][1] === undefined) {
         break;
-      this.rowData.push(data[i]);
+      }
+      this.rows.push(data[i].slice(1));
     }
-
   }
 
-  onGridReady($event) {
-    this.gridApi = $event.api;
-    this.gridApi.sizeColumnsToFit()
-  }
+  onExport(): void {
+    const name = this.storage.getSetting('name', '');
+    let fileName = name ? name + ' ' : '';
+    fileName += this.title;
+    fileName += '.csv';
 
-  onExport() {
-    var setting = new SettingFormComponent();
-    let name = setting.name;
-    if( name !== '' )
-      name += ' ';
-    if( this.router.url === '/count-distribution')
-      name += 'Count Distribution';
-    else if( this.router.url === '/magnitude-distribution')
-      name += 'Magnitude Distribution';
-    name += '.csv';
-    var params = {
-      fileName: name,
-      suppressQuotes: true
-    };
-    var csv = this.gridApi.getDataAsCsv(params);
-    var blob = new Blob([csv], {type: "text/plain;charset=utf-8"});
-    saveAs(blob, name);
+    const csvRows: string[] = [];
+    csvRows.push(this.headers.map((h) => h ?? '').join(','));
+    for (const row of this.rows) {
+      csvRows.push(row.map((c) => c ?? '').join(','));
+    }
+    const csv = csvRows.join('\n');
+    const blob = new Blob([csv], { type: 'text/plain;charset=utf-8' });
+    saveAs(blob, fileName);
   }
 }

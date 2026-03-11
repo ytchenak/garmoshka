@@ -1,25 +1,27 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { TestBed } from '@angular/core/testing';
 import { StatisticsComponent } from './statistics.component';
+import { MeteorService } from '../meteor.service';
 
 describe('StatisticsComponent', () => {
   let component: StatisticsComponent;
-  let fixture: ComponentFixture<StatisticsComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ StatisticsComponent ]
-    })
-    .compileComponents();
-  }));
+  beforeEach(async () => {
+    localStorage.clear();
+    await TestBed.configureTestingModule({
+      imports: [StatisticsComponent],
+    }).compileComponents();
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(StatisticsComponent);
+    const fixture = TestBed.createComponent(StatisticsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should have meteor service injected', () => {
+    expect(component.meteorService).toBeTruthy();
+    expect(component.meteorService).toBeInstanceOf(MeteorService);
   });
 });

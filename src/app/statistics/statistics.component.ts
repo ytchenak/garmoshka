@@ -1,19 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MeteorService } from '../meteor.service';
 
 @Component({
   selector: 'app-statistics',
+  imports: [],
   templateUrl: './statistics.component.html',
-  styleUrls: ['./statistics.component.scss']
+  styleUrl: './statistics.component.scss',
 })
-export class StatisticsComponent implements OnInit {
-  public showersStat = [];
-
-  constructor(public meteorService: MeteorService) { 
-  }
-
-  ngOnInit() {
-    
-  }
-
+export class StatisticsComponent {
+  constructor(public meteorService: MeteorService) {}
 }

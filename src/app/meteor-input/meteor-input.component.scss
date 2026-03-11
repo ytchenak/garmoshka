@@ -1,0 +1,58 @@
+.meteor-input-layout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.input-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.toolbar {
+  flex-wrap: wrap;
+}
+
+.data-textarea {
+  width: 100%;
+  min-height: 60vh;
+  padding: 0.75rem;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1rem;
+  line-height: 1.6;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  resize: vertical;
+  background: var(--color-surface);
+}
+
+.data-textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.side-panels {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.statistics-panel {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1rem;
+}
+
+@media (max-width: 768px) {
+  .meteor-input-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .data-textarea {
+    min-height: 40vh;
+  }
+}
