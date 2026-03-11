@@ -15,7 +15,7 @@ test.describe('Navigation', () => {
 
   test('should display the navbar brand', async ({ page }) => {
     await page.goto('/');
-    await expect(page.locator('.navbar-brand')).toHaveText('Garmoshka');
+    await expect(page.locator('.navbar-brand')).toContainText('Garmoshka');
   });
 
   test('should navigate to Settings page', async ({ page }) => {

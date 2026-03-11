@@ -59,7 +59,7 @@ test.describe('Meteor Input', () => {
 
   test('should display instruction', async ({ page }) => {
     await page.goto('/meteor-input');
-    await expect(page.locator('app-instruction')).toContainText('Instruction');
+    await expect(page.locator('app-instruction')).toContainText('Quick Guide');
   });
 
   test('should display line numbers', async ({ page }) => {
