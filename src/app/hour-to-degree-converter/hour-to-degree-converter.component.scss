@@ -11,6 +11,7 @@
 .converter-label {
   font-weight: 500;
   font-size: 0.875rem;
+  color: var(--color-text-muted);
 }
 
 .converter-input {
@@ -19,4 +20,5 @@
 
 .converter-separator {
   font-size: 1.25rem;
+  color: var(--color-primary);
 }

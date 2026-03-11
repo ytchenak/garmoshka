@@ -3,16 +3,61 @@
 }
 
 .card h3 {
-  margin-top: 0;
-  font-size: 1.125rem;
+  margin: 0;
+  font-size: 1rem;
+  display: inline;
+  color: var(--color-text);
+}
+
+.guide-toggle {
+  cursor: pointer;
+  padding: 0.25rem 0;
+  color: var(--color-text);
+  user-select: none;
+  list-style: none;
+}
+
+.guide-toggle::-webkit-details-marker {
+  display: none;
+}
+
+.guide-toggle::before {
+  content: '▸';
+  display: inline-block;
+  margin-right: 0.4rem;
+  font-size: 0.75rem;
+  color: var(--color-primary);
+  transition: transform 0.15s ease;
+}
+
+details[open] > .guide-toggle::before {
+  transform: rotate(90deg);
 }
 
 ul {
   padding-left: 1.25rem;
+  margin-top: 0.5rem;
 }
 
 li {
   margin-bottom: 0.25rem;
   font-size: 0.875rem;
   line-height: 1.6;
+  color: var(--color-text);
+}
+
+code {
+  background: var(--color-bg);
+  color: var(--color-primary);
+  padding: 0.1rem 0.35rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.shower-list {
+  display: inline-block;
+  margin-left: 0.25rem;
+  color: var(--color-text-muted);
+  font-style: italic;
 }

@@ -15,6 +15,7 @@
 .sheet-toolbar h2 {
   font-size: 1.25rem;
   margin: 0;
+  color: var(--color-text);
 }
 
 .table-wrapper {
@@ -30,4 +31,12 @@ table {
 
 td, th {
   white-space: nowrap;
+}
+
+td {
+  color: var(--color-text);
+}
+
+tbody tr:hover {
+  background: var(--color-surface-raised);
 }

@@ -19,6 +19,7 @@
   text-align: right;
   min-width: 2.5rem;
   flex-shrink: 0;
+  color: var(--color-text);
 }
 
 .mag-name {
@@ -28,11 +29,14 @@
 .stat-colon {
   flex-shrink: 0;
   margin: 0 0.25rem;
+  color: var(--color-text-muted);
 }
 
 .stat-value {
   min-width: 2rem;
   flex-shrink: 0;
+  color: var(--color-primary);
+  font-weight: 600;
 }
 
 .stat-bar-container {

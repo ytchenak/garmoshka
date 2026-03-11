@@ -24,10 +24,29 @@
 }
 
 .navbar-brand {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+.navbar-brand:hover {
+  text-decoration: none;
+}
+
+.brand-name {
   font-size: 1.25rem;
   font-weight: 700;
-  color: var(--color-text);
-  text-decoration: none;
+  color: var(--color-primary);
+  letter-spacing: 0.02em;
+}
+
+.brand-tagline {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .navbar-toggle {
@@ -39,12 +58,22 @@
   border-radius: var(--radius);
   padding: 6px 8px;
   cursor: pointer;
+  transition: border-color var(--transition);
+}
+
+.navbar-toggle:hover {
+  border-color: var(--color-text-muted);
 }
 
 .hamburger-line {
   display: block;
   width: 20px;
   height: 2px;
+  background: var(--color-text-muted);
+  transition: background var(--transition);
+}
+
+.navbar-toggle:hover .hamburger-line {
   background: var(--color-text);
 }
 
@@ -57,19 +86,26 @@
 }
 
 .nav-link {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
   padding: 0.5rem 0.75rem;
   color: var(--color-text-muted);
   text-decoration: none;
   font-size: 0.875rem;
   font-weight: 500;
   border-radius: var(--radius);
-  transition: background-color 0.15s, color 0.15s;
+  transition: background-color var(--transition), color var(--transition);
+}
+
+.nav-icon {
+  font-size: 0.8rem;
+  opacity: 0.8;
 }
 
 .nav-link:hover {
-  background: var(--color-bg);
-  color: var(--color-text);
+  background: var(--color-surface-raised);
+  color: var(--color-primary);
   text-decoration: none;
 }
 
@@ -86,6 +122,10 @@
     display: flex;
   }
 
+  .brand-tagline {
+    display: none;
+  }
+
   .nav-links {
     display: none;
     flex-direction: column;
@@ -97,12 +137,21 @@
     right: 0;
     background: var(--color-surface);
     border-bottom: 1px solid var(--color-border);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     z-index: 200;
   }
 
   .nav-links.open {
     display: flex;
+  }
+
+  .nav-links li {
+    padding: 0 0.5rem;
+  }
+
+  .nav-link {
+    padding: 0.65rem 0.75rem;
+    font-size: 0.95rem;
   }
 
   .navbar-inner {

@@ -1,39 +1,42 @@
 <div class="card">
-  <h3>Instruction:</h3>
-  <ul>
-    <li>Enter needed fields in <a routerLink="/setting">Settings</a> tab</li>
-    <li>
-      Enter observation data in Input tab; each row can contain a value in the following format:
-      <ul>
-        <li>Time in format HHMM</li>
-        <li>For field of obstruction enter a percent (e.g. 20%)</li>
-        <li>LM (Limiting magnitude) (e.g. Lm=6.1)</li>
-        <li>Dec (Declination in degrees) (e.g. Dec=35)</li>
-        <li>RA (Right Ascension in degrees) (e.g. RA=275)</li>
-        <li>
-          Meteor magnitude from -6 to 7
-          <ul>
-            <li>For sporadic add minus at end (e.g. 3-)</li>
-            <li>
-              For minor shower add meteor code of the shower at the end (e.g. 3CAP)
-              @if (showers) {
-                from list of minor showers in settings: {{ showers }}
-              }
-            </li>
-          </ul>
-        </li>
-        <li>For observation break enter two slashes (//)</li>
-      </ul>
-    </li>
-    <li>
-      Download the calculated tabs in CSV format:<br>
-      select <a routerLink="/count-distribution">Count Distribution</a> tab, export as CSV;<br>
-      select <a routerLink="/magnitude-distribution">Magnitude Distribution</a> tab, export as CSV;
-    </li>
-    <li>
-      Navigate to IMO
-      <a href="https://www.imo.net/members/imo_observation/upload_observation" target="_blank" rel="noopener">upload observation</a>
-      and follow instructions to upload the two downloaded CSV files
-    </li>
-  </ul>
+  <details class="quick-guide" open>
+    <summary class="guide-toggle">
+      <h3>Quick Guide</h3>
+    </summary>
+    <ul>
+      <li>Enter needed fields in <a routerLink="/setting">Settings</a> tab</li>
+      <li>
+        Enter observation data in Input tab; each row can contain a value in the following format:
+        <ul>
+          <li><code>HHMM</code> — Time</li>
+          <li><code>20%</code> — Field of obstruction</li>
+          <li><code>Lm=6.1</code> — Limiting magnitude</li>
+          <li><code>Dec=35</code> — Declination (degrees)</li>
+          <li><code>RA=275</code> — Right Ascension (degrees)</li>
+          <li>
+            <code>-6</code> to <code>7</code> — Meteor magnitude
+            <ul>
+              <li><code>3-</code> — sporadic (add minus at end)</li>
+              <li>
+                <code>3CAP</code> — minor shower (add code at end)
+                @if (showers) {
+                  <span class="shower-list">Active: {{ showers }}</span>
+                }
+              </li>
+            </ul>
+          </li>
+          <li><code>//</code> — Observation break</li>
+        </ul>
+      </li>
+      <li>
+        Export CSV from
+        <a routerLink="/count-distribution">Count</a> and
+        <a routerLink="/magnitude-distribution">Magnitude</a> tabs
+      </li>
+      <li>
+        Upload to IMO
+        <a href="https://www.imo.net/members/imo_observation/upload_observation" target="_blank" rel="noopener">upload observation</a>
+      </li>
+    </ul>
+  </details>
 </div>

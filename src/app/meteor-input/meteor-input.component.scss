@@ -42,12 +42,14 @@
   font-family: 'Courier New', Courier, monospace;
   font-size: 1rem;
   color: var(--color-text-muted);
+  opacity: 0.5;
 }
 
 .line-error {
   color: var(--color-danger);
   font-weight: 700;
   background: var(--color-danger-bg);
+  opacity: 1;
 }
 
 .data-textarea {
@@ -61,12 +63,19 @@
   border: none;
   resize: none;
   background: var(--color-surface);
+  color: var(--color-text);
   overflow-y: auto;
+  caret-color: var(--color-primary);
+}
+
+.data-textarea::placeholder {
+  color: var(--color-text-muted);
+  opacity: 0.4;
 }
 
 .data-textarea:focus {
   outline: none;
-  box-shadow: inset 0 0 0 2px rgba(59, 130, 246, 0.15);
+  box-shadow: inset 0 0 0 2px var(--color-primary-glow);
 }
 
 .side-panels {
@@ -82,6 +91,14 @@
   border-radius: var(--radius);
   padding: 1rem;
   flex-shrink: 0;
+}
+
+.panel-title {
+  margin: 0 0 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  letter-spacing: 0.02em;
 }
 
 .instruction-panel {

@@ -1,7 +1,10 @@
 <div class="app-shell">
   <nav class="navbar" role="navigation" aria-label="Main navigation">
     <div class="navbar-inner">
-      <a class="navbar-brand" routerLink="/">Garmoshka</a>
+      <a class="navbar-brand" routerLink="/">
+        <span class="brand-name">Garmoshka</span>
+        <span class="brand-tagline">Visual Meteor Observation</span>
+      </a>
 
       <button
         class="navbar-toggle"
@@ -17,10 +20,10 @@
       </button>
 
       <ul id="nav-menu" class="nav-links" [class.open]="navbarOpen" role="menubar">
-        <li role="none"><a class="nav-link" role="menuitem" routerLink="setting" (click)="toggleNavbar()">Settings</a></li>
-        <li role="none"><a class="nav-link" role="menuitem" routerLink="meteor-input" (click)="toggleNavbar()">Input</a></li>
-        <li role="none"><a class="nav-link" role="menuitem" routerLink="count-distribution" (click)="toggleNavbar()">Count Distribution</a></li>
-        <li role="none"><a class="nav-link" role="menuitem" routerLink="magnitude-distribution" (click)="toggleNavbar()">Magnitude Distribution</a></li>
+        <li role="none"><a class="nav-link" role="menuitem" routerLink="setting" (click)="toggleNavbar()"><span class="nav-icon">☆</span> Settings</a></li>
+        <li role="none"><a class="nav-link" role="menuitem" routerLink="meteor-input" (click)="toggleNavbar()"><span class="nav-icon">✎</span> Input</a></li>
+        <li role="none"><a class="nav-link" role="menuitem" routerLink="count-distribution" (click)="toggleNavbar()"><span class="nav-icon">📊</span> Count Distribution</a></li>
+        <li role="none"><a class="nav-link" role="menuitem" routerLink="magnitude-distribution" (click)="toggleNavbar()"><span class="nav-icon">📈</span> Magnitude Distribution</a></li>
       </ul>
     </div>
   </nav>
