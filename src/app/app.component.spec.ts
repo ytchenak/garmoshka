@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach } from 'vitest';
 import { TestBed } from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
@@ -18,16 +19,16 @@ describe('AppComponent', () => {
   it('should have navbarOpen initially false', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.navbarOpen).toBeFalse();
+    expect(app.navbarOpen).toBe(false);
   });
 
   it('should toggle navbarOpen', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     app.toggleNavbar();
-    expect(app.navbarOpen).toBeTrue();
+    expect(app.navbarOpen).toBe(true);
     app.toggleNavbar();
-    expect(app.navbarOpen).toBeFalse();
+    expect(app.navbarOpen).toBe(false);
   });
 
   it('should render navbar brand', () => {

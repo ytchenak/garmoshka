@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { StorageService } from '../storage.service';
 import { DEFAULT_SETTINGS } from '../meteor-settings';
@@ -11,6 +11,8 @@ import { HourToDegreeConverterComponent } from '../hour-to-degree-converter/hour
   styleUrl: './setting-form.component.scss',
 })
 export class SettingFormComponent {
+  private storage = inject(StorageService);
+
   name: string;
   shower: string;
   showers: string;
@@ -21,7 +23,7 @@ export class SettingFormComponent {
   RaStartTime: string;
   RaStartValue: string;
 
-  constructor(private storage: StorageService) {
+  constructor() {
     this.name = this.storage.getSetting('name', DEFAULT_SETTINGS.name);
     this.shower = this.storage.getSetting('shower', DEFAULT_SETTINGS.shower);
     this.showers = this.storage.getSetting('showers', DEFAULT_SETTINGS.showers);

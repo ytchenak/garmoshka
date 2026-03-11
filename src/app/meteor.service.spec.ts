@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach } from 'vitest';
 import { TestBed } from '@angular/core/testing';
 import { MeteorService } from './meteor.service';
 import { StorageService } from './storage.service';
@@ -41,43 +42,43 @@ describe('MeteorService', () => {
   });
 
   it('should recognize time values', () => {
-    expect(service.isTime('2100')).toBeTrue();
-    expect(service.isTime('0000')).toBeTrue();
-    expect(service.isTime('2359')).toBeTrue();
-    expect(service.isTime('2400')).toBeFalse();
-    expect(service.isTime('abc')).toBeFalse();
-    expect(service.isTime('')).toBeFalse();
+    expect(service.isTime('2100')).toBe(true);
+    expect(service.isTime('0000')).toBe(true);
+    expect(service.isTime('2359')).toBe(true);
+    expect(service.isTime('2400')).toBe(false);
+    expect(service.isTime('abc')).toBe(false);
+    expect(service.isTime('')).toBe(false);
   });
 
   it('should recognize sporadic meteors', () => {
-    expect(service.isSporadic('3-')).toBeTrue();
-    expect(service.isSporadic('-1-')).toBeTrue();
-    expect(service.isSporadic('3')).toBeFalse();
+    expect(service.isSporadic('3-')).toBe(true);
+    expect(service.isSporadic('-1-')).toBe(true);
+    expect(service.isSporadic('3')).toBe(false);
   });
 
   it('should recognize default shower meteors', () => {
-    expect(service.isDefaultShower('3')).toBeTrue();
-    expect(service.isDefaultShower('-1')).toBeTrue();
-    expect(service.isDefaultShower('33')).toBeFalse();
-    expect(service.isDefaultShower('abc')).toBeFalse();
+    expect(service.isDefaultShower('3')).toBe(true);
+    expect(service.isDefaultShower('-1')).toBe(true);
+    expect(service.isDefaultShower('33')).toBe(false);
+    expect(service.isDefaultShower('abc')).toBe(false);
   });
 
   it('should recognize Lm values', () => {
-    expect(service.isLm('Lm=5.5')).toBeTrue();
-    expect(service.isLm('lm=6.1')).toBeTrue();
-    expect(service.isLm('Lm5.5')).toBeFalse();
+    expect(service.isLm('Lm=5.5')).toBe(true);
+    expect(service.isLm('lm=6.1')).toBe(true);
+    expect(service.isLm('Lm5.5')).toBe(false);
     expect(service.getLm('Lm=5.5')).toBe(5.5);
   });
 
   it('should recognize Dec values', () => {
-    expect(service.isDec('Dec=35')).toBeTrue();
-    expect(service.isDec('dec=35')).toBeTrue();
+    expect(service.isDec('Dec=35')).toBe(true);
+    expect(service.isDec('dec=35')).toBe(true);
     expect(service.getDec('Dec=35')).toBe(35);
   });
 
   it('should recognize Ra values', () => {
-    expect(service.isRa('Ra=275')).toBeTrue();
-    expect(service.isRa('RA=275')).toBeTrue();
+    expect(service.isRa('Ra=275')).toBe(true);
+    expect(service.isRa('RA=275')).toBe(true);
     expect(service.getRa('RA=275')).toBe(275);
   });
 

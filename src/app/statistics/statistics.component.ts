@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MeteorService } from '../meteor.service';
 
 @Component({
@@ -8,7 +8,8 @@ import { MeteorService } from '../meteor.service';
   styleUrl: './statistics.component.scss',
 })
 export class StatisticsComponent {
-  constructor(public meteorService: MeteorService) {}
+  meteorService = inject(MeteorService);
+
 
   get maxMagnitudeCount(): number {
     if (this.meteorService.magnitudeStat.length === 0) return 0;

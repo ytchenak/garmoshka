@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MeteorService } from '../meteor.service';
 import { StorageService } from '../storage.service';
@@ -12,6 +12,9 @@ import { InstructionComponent } from '../instruction/instruction.component';
   styleUrl: './meteor-input.component.scss',
 })
 export class MeteorInputComponent implements OnInit {
+  meteorService = inject(MeteorService);
+  private storage = inject(StorageService);
+
   error = '';
   errorRow = 0;
   inputText = '';
@@ -19,11 +22,6 @@ export class MeteorInputComponent implements OnInit {
 
   @ViewChild('lineGutter') lineGutter!: ElementRef<HTMLDivElement>;
   @ViewChild('dataTextarea') dataTextarea!: ElementRef<HTMLTextAreaElement>;
-
-  constructor(
-    public meteorService: MeteorService,
-    private storage: StorageService,
-  ) {}
 
   ngOnInit(): void {
     const rowData = this.storage.getRowData();

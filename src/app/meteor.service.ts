@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { StorageService } from './storage.service';
 import { DEFAULT_SETTINGS } from './meteor-settings';
 
@@ -9,6 +9,8 @@ export interface ShowerStat {
 
 @Injectable({ providedIn: 'root' })
 export class MeteorService {
+  private storage = inject(StorageService);
+
   F = 0;
   Lm = 0;
   curDate = new Date();
@@ -31,8 +33,6 @@ export class MeteorService {
   showersStat: ShowerStat[] = [];
   magnitudeStat: ShowerStat[] = [];
   currentRow = 0;
-
-  constructor(private storage: StorageService) {}
 
   calc(dataValues: string[]): void {
     this.readSetting();

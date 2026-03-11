@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { StorageService } from '../storage.service';
 
@@ -9,9 +9,11 @@ import { StorageService } from '../storage.service';
   styleUrl: './instruction.component.scss',
 })
 export class InstructionComponent {
+  private storage = inject(StorageService);
+
   showers: string;
 
-  constructor(private storage: StorageService) {
+  constructor() {
     this.showers = this.storage.getSetting('showers', '');
   }
 }

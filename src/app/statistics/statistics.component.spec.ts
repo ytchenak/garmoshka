@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach } from 'vitest';
 import { TestBed } from '@angular/core/testing';
 import { StatisticsComponent } from './statistics.component';
 import { MeteorService } from '../meteor.service';

@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { TestBed } from '@angular/core/testing';
 import { RouterModule, Router } from '@angular/router';
 import { SheetComponent } from './sheet.component';
@@ -27,7 +28,7 @@ describe('SheetComponent', () => {
   it('should create', () => {
     const router = TestBed.inject(Router);
     const fixture = TestBed.createComponent(SheetComponent);
-    spyOnProperty(router, 'url', 'get').and.returnValue('/count-distribution');
+    vi.spyOn(router, 'url', 'get').mockReturnValue('/count-distribution');
     component = fixture.componentInstance;
     fixture.detectChanges();
     expect(component).toBeTruthy();
@@ -36,7 +37,7 @@ describe('SheetComponent', () => {
   it('should load count distribution data', () => {
     const router = TestBed.inject(Router);
     const fixture = TestBed.createComponent(SheetComponent);
-    spyOnProperty(router, 'url', 'get').and.returnValue('/count-distribution');
+    vi.spyOn(router, 'url', 'get').mockReturnValue('/count-distribution');
     component = fixture.componentInstance;
     fixture.detectChanges();
     expect(component.title).toBe('Count Distribution');
@@ -47,7 +48,7 @@ describe('SheetComponent', () => {
   it('should load magnitude distribution data', () => {
     const router = TestBed.inject(Router);
     const fixture = TestBed.createComponent(SheetComponent);
-    spyOnProperty(router, 'url', 'get').and.returnValue('/magnitude-distribution');
+    vi.spyOn(router, 'url', 'get').mockReturnValue('/magnitude-distribution');
     component = fixture.componentInstance;
     fixture.detectChanges();
     expect(component.title).toBe('Magnitude Distribution');

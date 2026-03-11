@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { MeteorService } from '../meteor.service';
 import { StorageService } from '../storage.service';
@@ -11,15 +11,13 @@ import { saveAs } from 'file-saver';
   styleUrl: './sheet.component.scss',
 })
 export class SheetComponent implements OnInit {
+  private meteorService = inject(MeteorService);
+  private storage = inject(StorageService);
+  private router = inject(Router);
+
   headers: (string | number | undefined)[] = [];
   rows: Array<Array<string | number | undefined>> = [];
   title = '';
-
-  constructor(
-    private meteorService: MeteorService,
-    private storage: StorageService,
-    private router: Router,
-  ) {}
 
   getData(): Array<Array<string | number | undefined>> | null {
     if (this.router.url === '/count-distribution') {

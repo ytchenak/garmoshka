@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { TestBed } from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
 import { MeteorInputComponent } from './meteor-input.component';
@@ -38,14 +39,14 @@ describe('MeteorInputComponent', () => {
   });
 
   it('should clear data on clean', () => {
-    spyOn(window, 'confirm').and.returnValue(true);
+    vi.spyOn(window, 'confirm').mockReturnValue(true);
     component.inputText = '2100\n3\n2200';
     component.onClean();
     expect(component.inputText).toBe('');
   });
 
   it('should not clear data if confirm is canceled', () => {
-    spyOn(window, 'confirm').and.returnValue(false);
+    vi.spyOn(window, 'confirm').mockReturnValue(false);
     component.inputText = '2100\n3\n2200';
     component.onClean();
     expect(component.inputText).toBe('2100\n3\n2200');
@@ -80,7 +81,7 @@ describe('MeteorInputComponent', () => {
   });
 
   it('should reset line numbers on clean', () => {
-    spyOn(window, 'confirm').and.returnValue(true);
+    vi.spyOn(window, 'confirm').mockReturnValue(true);
     component.inputText = '2100\n3\n2200';
     component.updateLineNumbers();
     expect(component.lineNumbers.length).toBe(3);
