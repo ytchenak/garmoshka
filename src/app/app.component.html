@@ -1,26 +1,31 @@
+<div class="app-shell">
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="navbar-inner">
+      <a class="navbar-brand" routerLink="/">Garmoshka</a>
 
-<div class="container-fluid h-100 d-flex flex-column">
-  <nav class="row navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" >
-          Garmoshka
-        </a>
-      
-        <button class="navbar-toggler" type="button" 
-        (click)="toggleNavbar()">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse " [ngClass]="{'show': navbarOpen}">
-          <ul class="navbar-nav mr-auto" (click)="toggleNavbar()">
-              <li class="nav-item"><a class="nav-link" routerLink="setting">Settings</a></li>
-              <li class="nav-item"><a class="nav-link" routerLink="meteor-input">Input</a></li>
-              <li class="nav-item"><a class="nav-link" routerLink="count-distribution">Count Distribution</a></li>
-              <li class="nav-item"><a class="nav-link" routerLink="magnitude-distribution">Magnitude Disgribution</a></li>
-          </ul>
-        </div>
+      <button
+        class="navbar-toggle"
+        type="button"
+        [attr.aria-expanded]="navbarOpen"
+        aria-controls="nav-menu"
+        aria-label="Toggle navigation"
+        (click)="toggleNavbar()"
+      >
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+
+      <ul id="nav-menu" class="nav-links" [class.open]="navbarOpen" role="menubar">
+        <li role="none"><a class="nav-link" role="menuitem" routerLink="setting" (click)="toggleNavbar()">Settings</a></li>
+        <li role="none"><a class="nav-link" role="menuitem" routerLink="meteor-input" (click)="toggleNavbar()">Input</a></li>
+        <li role="none"><a class="nav-link" role="menuitem" routerLink="count-distribution" (click)="toggleNavbar()">Count Distribution</a></li>
+        <li role="none"><a class="nav-link" role="menuitem" routerLink="magnitude-distribution" (click)="toggleNavbar()">Magnitude Distribution</a></li>
+      </ul>
+    </div>
   </nav>
-    
-    
-  <router-outlet></router-outlet>
-    
+
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
 </div>

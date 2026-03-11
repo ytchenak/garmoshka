@@ -1,25 +1,26 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { TestBed } from '@angular/core/testing';
+import { RouterModule } from '@angular/router';
 import { InstructionComponent } from './instruction.component';
 
 describe('InstructionComponent', () => {
   let component: InstructionComponent;
-  let fixture: ComponentFixture<InstructionComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ InstructionComponent ]
-    })
-    .compileComponents();
-  }));
+  beforeEach(async () => {
+    localStorage.clear();
+    await TestBed.configureTestingModule({
+      imports: [InstructionComponent, RouterModule.forRoot([])],
+    }).compileComponents();
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(InstructionComponent);
+    const fixture = TestBed.createComponent(InstructionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should read showers from storage', () => {
+    expect(component.showers).toBe('');
   });
 });

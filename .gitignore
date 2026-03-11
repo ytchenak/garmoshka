@@ -4,8 +4,6 @@
 /dist
 /tmp
 /out-tsc
-# Only exists if Bazel was run
-/bazel-out
 
 # dependencies
 /node_modules
@@ -46,3 +44,9 @@ testem.log
 Thumbs.db
 
 *.cache
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
