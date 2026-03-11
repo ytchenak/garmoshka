@@ -1,44 +1,44 @@
 <div class="meteor-input-layout">
-  <div class="input-panel">
-    @if (error) {
-      <div class="alert alert-danger" role="alert">{{ error }}</div>
-    }
+  @if (error) {
+    <div class="alert alert-danger" role="alert">{{ error }}</div>
+  }
 
-    <div class="btn-group toolbar">
-      <button class="btn btn-outline" (click)="onClean()" title="Delete all" aria-label="Delete all data">🗑️ Clear</button>
-      <button class="btn btn-outline" (click)="onCopyAll()" title="Copy all" aria-label="Copy all data">📋 Copy</button>
-      <button class="btn btn-outline" (click)="onPasteAll()" title="Paste all" aria-label="Paste all data">📥 Paste</button>
-    </div>
-
-    <label class="sr-only" for="meteor-data">Meteor observation data</label>
-    <div class="editor-container">
-      <div class="line-gutter" #lineGutter>
-        @for (num of lineNumbers; track num) {
-          <div class="line-number" [class.line-error]="num === errorRow">{{ num }}</div>
-        }
-      </div>
-      <textarea
-        id="meteor-data"
-        #dataTextarea
-        class="data-textarea"
-        inputmode="numeric"
-        [(ngModel)]="inputText"
-        (ngModelChange)="onInputChange()"
-        (scroll)="onScroll()"
-        placeholder="Enter observation data, one value per line..."
-        spellcheck="false"
-      ></textarea>
-    </div>
+  <div class="btn-group toolbar">
+    <button class="btn btn-outline" (click)="onClean()" title="Delete all" aria-label="Delete all data">🗑️ Clear</button>
+    <button class="btn btn-outline" (click)="onCopyAll()" title="Copy all" aria-label="Copy all data">📋 Copy</button>
+    <button class="btn btn-outline" (click)="onPasteAll()" title="Paste all" aria-label="Paste all data">📥 Paste</button>
   </div>
 
-  <div class="side-panels">
+  <div class="content-row">
+    <div class="input-panel">
+      <label class="sr-only" for="meteor-data">Meteor observation data</label>
+      <div class="editor-container">
+        <div class="line-gutter" #lineGutter>
+          @for (num of lineNumbers; track num) {
+            <div class="line-number" [class.line-error]="num === errorRow">{{ num }}</div>
+          }
+        </div>
+        <textarea
+          id="meteor-data"
+          #dataTextarea
+          class="data-textarea"
+          inputmode="numeric"
+          [(ngModel)]="inputText"
+          (ngModelChange)="onInputChange()"
+          (scroll)="onScroll()"
+          placeholder="Enter observation data, one value per line..."
+          spellcheck="false"
+        ></textarea>
+      </div>
+    </div>
+
     <div class="statistics-panel">
       <h3 class="panel-title">📊 Statistics</h3>
       <app-statistics></app-statistics>
     </div>
+  </div>
 
-    <div class="instruction-panel">
-      <app-instruction></app-instruction>
-    </div>
+  <div class="instruction-panel">
+    <app-instruction></app-instruction>
   </div>
 </div>
