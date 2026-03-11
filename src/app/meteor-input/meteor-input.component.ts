@@ -1,150 +1,102 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { MeteorService } from '../meteor.service';
-import { LocalStorage, LocalStorageService } from 'ngx-webstorage';
-import { SettingFormComponent } from '../setting-form/setting-form.component';
-import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
-import { Module } from '@ag-grid-community/core';
+import { StorageService } from '../storage.service';
+import { StatisticsComponent } from '../statistics/statistics.component';
+import { InstructionComponent } from '../instruction/instruction.component';
 
 @Component({
   selector: 'app-meteor-input',
+  imports: [FormsModule, StatisticsComponent, InstructionComponent],
   templateUrl: './meteor-input.component.html',
-  styleUrls: ['./meteor-input.component.scss']
+  styleUrl: './meteor-input.component.scss',
 })
 export class MeteorInputComponent implements OnInit {
-  modules: Module[] = [ClientSideRowModelModule];
+  meteorService = inject(MeteorService);
+  private storage = inject(StorageService);
+
   error = '';
+  errorRow = 0;
+  inputText = '';
+  lineNumbers: number[] = [1];
 
-  columnDefs = [
-    {headerName: '#', valueGetter: this.getIndex, editable: false, width: 50},
-    {
-      headerName: '', field: 'data', editable: true, width: 110,
-      cellStyle: {'font-size': '20px'},
-    },
-  ];
+  @ViewChild('lineGutter') lineGutter!: ElementRef<HTMLDivElement>;
+  @ViewChild('dataTextarea') dataTextarea!: ElementRef<HTMLTextAreaElement>;
 
-  getIndex(params) {
-    return params.node.childIndex + 1;
-  }
-
-  private gridApi;
-
-  rowData: Array<{data: string}>;
-
-  constructor(public meteorService: MeteorService,
-    public storage: LocalStorageService) {
-      this.rowData = this.storage.retrieve('rowdata');
-  }
-
-  ngOnInit() {
-    if( !this.rowData) {
-      this.rowData = this.cleanRowData();
-      new SettingFormComponent(); //ensure that setting will be written in localstorage
+  ngOnInit(): void {
+    const rowData = this.storage.getRowData();
+    if (rowData) {
+      this.inputText = rowData.map((r) => r.data).join('\n');
     }
-
+    this.updateLineNumbers();
     this.calc();
   }
 
-  private cleanRowData(): Array<{data: string}> {
-    let rowData = new Array<{data: string}>();
-    for (let i = 0; i < 999; i++) {
-      rowData.push({data: ''});   
-    }
-    return rowData;
+  get dataValues(): string[] {
+    return this.inputText.split('\n');
   }
 
-
-  onGridReady(params) {
-    this.gridApi = params.api;
-    this.gridApi.setFocusedCell(0, "data");
-    
+  updateLineNumbers(): void {
+    const count = this.inputText === '' ? 1 : this.inputText.split('\n').length;
+    this.lineNumbers = Array.from({ length: count }, (_, i) => i + 1);
   }
 
-  onClean() {
+  onInputChange(): void {
+    this.updateLineNumbers();
+    const rowData = this.dataValues.map((d) => ({ data: d }));
+    this.storage.setRowData(rowData);
+    this.calc();
+  }
+
+  onClean(): void {
     if (confirm('All data will be deleted, are you sure?')) {
-      this.rowData = this.cleanRowData();
-      this.gridApi.setRowData(this.rowData);
-      this.storage.store('rowdata', this.rowData);
+      this.inputText = '';
+      this.updateLineNumbers();
+      this.storage.setRowData([]);
       this.calc();
     }
   }
 
-  onInsert() {
-    let index = this.gridApi.getFocusedCell().rowIndex;
-    this.rowData.splice(index+1, 0, {data: ''});
-    this.gridApi.setRowData(this.rowData);
-    this.storage.store('rowdata', this.rowData);
-    this.gridApi.setFocusedCell(index, "data");
-    this.gridApi.ensureIndexVisible(index, 'middle')
-  }
-
-  onDelete() {
-    let index = this.gridApi.getFocusedCell().rowIndex;
-    this.rowData.splice(index, 1);
-    this.gridApi.setRowData(this.rowData);
-    this.storage.store('rowdata', this.rowData);
-    this.gridApi.setFocusedCell(index, "data");
-    this.gridApi.ensureIndexVisible(index, 'middle')
-  }
-
-  get dataValues() {
-    return this.rowData.map( x => x.data);
-  }
-
-  onCellValueChanged($event) {
-    // change row data to be upper-case, for all array
-    for ( let row of this.rowData) {
-      const upperCaseRow = row.data.toUpperCase();
-      if (row.data !== upperCaseRow) {
-        row.data = upperCaseRow;
-      }
-    }
-
-    this.storage.store('rowdata', this.rowData);
-    this.calc();
-  }
-
-  calc() {
+  calc(): void {
     try {
       this.error = '';
+      this.errorRow = 0;
       this.meteorService.calc(this.dataValues);
-    } catch(e) {
-      this.error = e;
-      alert(e)
+    } catch (e) {
+      this.error = String(e);
+      const match = this.error.match(/row\s+(\d+)/i);
+      this.errorRow = match ? parseInt(match[1], 10) : 0;
     }
   }
 
-
-  private pasteFromClipboard(): Promise<void> {
-    
-    return navigator['clipboard'].readText()
-      .then(text => {
-        let data: string[] = text.split('\n');
-        let i = 0;
-        for(; i<data.length; i++) {
-          this.rowData[i] = {data: data[i].trim()};
-        }
-        for(; i<999; i++) {
-          this.rowData[i] = {data: ''}
-        }
-        this.gridApi.setRowData(this.rowData);
-        this.storage.store('rowdata', this.rowData);
-        this.calc();
-      })
-    .catch(err => {
-      console.error('Failed to read clipboard contents: ', err);
-    });
+  syncScroll(): void {
+    if (this.lineGutter && this.dataTextarea) {
+      this.lineGutter.nativeElement.scrollTop = this.dataTextarea.nativeElement.scrollTop;
+    }
   }
-  onPasteAll() {
-    if (!confirm('All data will be deleted, are you sure?')) 
+
+  onScroll(): void {
+    this.syncScroll();
+  }
+
+  async onPasteAll(): Promise<void> {
+    if (!confirm('All data will be replaced, are you sure?')) {
       return;
-    setTimeout(() => this.pasteFromClipboard(),250);
-  }
-  onCopyAll() {
-    let text = this.dataValues.join('\n');
-    navigator['clipboard'].writeText(text)
-      .catch(err => {
-        console.error('Failed to write content to clipboard: ', err);
-      });
+    }
+    try {
+      const text = await navigator.clipboard.readText();
+      this.inputText = text.trim();
+      this.onInputChange();
+    } catch (err) {
+      console.error('Failed to read clipboard contents: ', err);
+    }
   }
 
+  async onCopyAll(): Promise<void> {
+    try {
+      await navigator.clipboard.writeText(this.inputText);
+    } catch (err) {
+      console.error('Failed to write to clipboard: ', err);
+    }
+  }
 }

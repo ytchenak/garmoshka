@@ -1,19 +1,35 @@
 # Garmoshka
+
+A web application for capturing and processing visual meteor observations in the [IMO](https://www.imo.net/) format.
+
 Site: https://garmoshka-meteors.firebaseapp.com
 
+## Tech Stack
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.0.
+- **Angular 19** with standalone components
+- **TypeScript 5.7** with strict mode
+- **ESLint** (angular-eslint) with zero-warning policy
+- **Karma/Jasmine** for unit tests
+- **Playwright** for E2E tests (desktop + mobile)
+- **GitHub Actions** CI pipeline
 
-## Development server
+## Development
 
-Run `npx ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+```bash
+npm install
+npm start           # Dev server at http://localhost:4200/
+npm run lint        # ESLint
+npm test            # Unit tests
+npm run e2e         # Playwright E2E tests
+npm run build       # Production build
+```
 
+## Build & Deploy
 
-## Build & Publish 
-`nvm use 16.19.0`
-`npx ng build --prod`
-`nvm use 20.9.0`
-`npm install -g firebase-tools`
-`firebase login`
-`firebase deploy`
+```bash
+npm run build
+npm install -g firebase-tools
+firebase login
+firebase deploy
+```
 

@@ -1,0 +1,132 @@
+.meteor-input-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.toolbar {
+  flex-wrap: wrap;
+}
+
+.content-row {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.input-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.editor-container {
+  display: flex;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--color-surface);
+}
+
+.line-gutter {
+  flex-shrink: 0;
+  width: 3rem;
+  min-height: 60vh;
+  overflow: hidden;
+  background: var(--color-bg);
+  border-right: 1px solid var(--color-border);
+  padding-top: 0.75rem;
+  user-select: none;
+}
+
+.line-number {
+  height: 1.6em;
+  line-height: 1.6;
+  text-align: right;
+  padding-right: 0.5rem;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  opacity: 0.5;
+}
+
+.line-error {
+  color: var(--color-danger);
+  font-weight: 700;
+  background: var(--color-danger-bg);
+  opacity: 1;
+}
+
+.data-textarea {
+  flex: 1;
+  min-height: 60vh;
+  padding: 0.75rem;
+  padding-left: 0.5rem;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1rem;
+  line-height: 1.6;
+  border: none;
+  resize: none;
+  background: var(--color-surface);
+  color: var(--color-text);
+  overflow-y: auto;
+  caret-color: var(--color-primary);
+}
+
+.data-textarea::placeholder {
+  color: var(--color-text-muted);
+  opacity: 0.4;
+}
+
+.data-textarea:focus {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--color-primary-glow);
+}
+
+.statistics-panel {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  flex-shrink: 0;
+}
+
+.panel-title {
+  margin: 0 0 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  letter-spacing: 0.02em;
+}
+
+.instruction-panel {
+  min-width: 0;
+}
+
+@media (max-width: 768px) {
+  .content-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  .data-textarea {
+    min-height: 50vh;
+  }
+
+  .line-gutter {
+    min-height: 50vh;
+    width: 2.25rem;
+  }
+
+  .line-number {
+    font-size: 0.8rem;
+  }
+
+  .statistics-panel {
+    padding: 0.5rem;
+  }
+
+  .panel-title {
+    font-size: 0.75rem;
+  }
+}

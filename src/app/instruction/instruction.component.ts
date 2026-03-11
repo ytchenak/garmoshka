@@ -1,16 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { SettingFormComponent } from '../setting-form/setting-form.component';
+import { Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { StorageService } from '../storage.service';
 
 @Component({
   selector: 'app-instruction',
+  imports: [RouterLink],
   templateUrl: './instruction.component.html',
-  styleUrls: ['./instruction.component.scss']
+  styleUrl: './instruction.component.scss',
 })
-export class InstructionComponent implements OnInit {
-  public settings = new SettingFormComponent(); 
-  constructor() { }
+export class InstructionComponent {
+  private storage = inject(StorageService);
 
-  ngOnInit() {
+  showers: string;
+
+  constructor() {
+    this.showers = this.storage.getSetting('showers', '');
   }
-
 }

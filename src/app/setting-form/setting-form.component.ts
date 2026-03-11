@@ -1,49 +1,41 @@
-import { Component, OnInit } from '@angular/core';
-import {LocalStorage} from 'ngx-webstorage';
-import * as moment from 'moment';
+import { Component, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { StorageService } from '../storage.service';
+import { DEFAULT_SETTINGS } from '../meteor-settings';
+import { HourToDegreeConverterComponent } from '../hour-to-degree-converter/hour-to-degree-converter.component';
 
 @Component({
   selector: 'app-setting-form',
+  imports: [FormsModule, HourToDegreeConverterComponent],
   templateUrl: './setting-form.component.html',
-  styleUrls: ['./setting-form.component.scss']
+  styleUrl: './setting-form.component.scss',
 })
-export class SettingFormComponent implements OnInit {
+export class SettingFormComponent {
+  private storage = inject(StorageService);
 
-  @LocalStorage() name: string;
-  @LocalStorage() shower: string;
-  @LocalStorage() showers: string;
-  @LocalStorage() curDate: string;
-  @LocalStorage() F: string;
-  @LocalStorage() Lm: string;
-  @LocalStorage() Dec: string;
-  @LocalStorage() RaStartTime: string;
-  @LocalStorage() RaStartValue: string;
+  name: string;
+  shower: string;
+  showers: string;
+  curDate: string;
+  F: string;
+  Lm: string;
+  Dec: string;
+  RaStartTime: string;
+  RaStartValue: string;
 
   constructor() {
-    if( !this.name)
-      this.name = '';
-    if( !this.shower)
-      this.shower = 'PER';
-    if( !this.showers)
-      this.showers = '';
-    if( !this.curDate)
-      this.curDate = moment(new Date()).format('DD/MM/YYYY');;
-    if( !this.F )
-      this.F = '0';
-    if( !this.Lm)
-      this.Lm = '5.75';
-    if( !this.Dec) 
-      this.Dec = '30';
-    if( !this.RaStartTime )
-      this.RaStartTime = '1900';
-    if( !this.RaStartValue)
-      this.RaStartValue = '236';
+    this.name = this.storage.getSetting('name', DEFAULT_SETTINGS.name);
+    this.shower = this.storage.getSetting('shower', DEFAULT_SETTINGS.shower);
+    this.showers = this.storage.getSetting('showers', DEFAULT_SETTINGS.showers);
+    this.curDate = this.storage.getSetting('curDate', DEFAULT_SETTINGS.curDate);
+    this.F = this.storage.getSetting('F', DEFAULT_SETTINGS.F);
+    this.Lm = this.storage.getSetting('Lm', DEFAULT_SETTINGS.Lm);
+    this.Dec = this.storage.getSetting('Dec', DEFAULT_SETTINGS.Dec);
+    this.RaStartTime = this.storage.getSetting('RaStartTime', DEFAULT_SETTINGS.RaStartTime);
+    this.RaStartValue = this.storage.getSetting('RaStartValue', DEFAULT_SETTINGS.RaStartValue);
   }
 
-  ngOnInit() {
+  onFieldChange(field: string, value: string): void {
+    this.storage.setSetting(field, value);
   }
-
-    
-
-  
 }

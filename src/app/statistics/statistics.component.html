@@ -1,11 +1,24 @@
-<ul>
-    <li *ngFor="let shower of meteorService.showersStat">
-        {{shower.name}}: {{shower.count}}
-    </li>
-    <hr>
-    <li *ngFor="let mag of meteorService.magnitudeStat" >
-        <span *ngIf="mag.name >= 0">&nbsp;</span>
-        {{mag.name}}: {{mag.count}}
-    </li>
-</ul>
-
+<div class="stat-section">
+  @for (shower of meteorService.showersStat; track shower.name) {
+    <div class="stat-row">
+      <span class="stat-name">{{ shower.name }}</span>
+      <span class="stat-colon">:</span>
+      <span class="stat-value">{{ shower.count }}</span>
+    </div>
+  }
+</div>
+@if (meteorService.magnitudeStat.length > 0) {
+  <hr>
+  <div class="stat-section">
+    @for (mag of meteorService.magnitudeStat; track mag.name) {
+      <div class="stat-row mag-row">
+        <span class="stat-name mag-name">{{ mag.name }}</span>
+        <span class="stat-colon">:</span>
+        <span class="stat-value mag-value">{{ mag.count }}</span>
+        <span class="stat-bar-container">
+          <span class="stat-bar" [style.width.%]="barWidth(mag.count)"></span>
+        </span>
+      </div>
+    }
+  </div>
+}

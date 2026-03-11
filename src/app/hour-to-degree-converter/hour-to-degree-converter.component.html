@@ -1,4 +1,6 @@
-<span>Help convert: </span>
-<input type="text" placeholder="HHMMSS" [(ngModel)]="time">
-<span> <=> </span>
-<input type="text" placeholder="Degrees" [(ngModel)]="degrees">
+<div class="converter">
+  <span class="converter-label">Convert:</span>
+  <input class="form-control converter-input" type="text" placeholder="HHMMSS" [(ngModel)]="time" aria-label="Time in HHMMSS format">
+  <span class="converter-separator">⇔</span>
+  <input class="form-control converter-input" type="text" placeholder="Degrees" [(ngModel)]="degrees" aria-label="Degrees">
+</div>
